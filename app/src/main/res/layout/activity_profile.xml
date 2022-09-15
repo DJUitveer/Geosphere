@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pop_bg"
+    tools:context=".ProfileActivity">
+
+    <Button
+        android:id="@+id/btnDeleteProfile"
+        android:layout_width="171dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_input"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Delete Profile"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnAchievements"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
+        tools:layout_editor_absoluteX="120dp" />
+
+    <Button
+        android:id="@+id/btnAchievements"
+        android:layout_width="171dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_input"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Achievemet"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnHistory"
+        app:layout_constraintTop_toBottomOf="@+id/btnDeleteProfile"
+        tools:layout_editor_absoluteX="120dp" />
+
+    <Button
+        android:id="@+id/btnHistory"
+        android:layout_width="171dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_input"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="History"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintTop_toBottomOf="@+id/btnAchievements"
+        tools:layout_editor_absoluteX="120dp" />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="171dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_input"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Edit Profile"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnDeleteProfile"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfile"
+        tools:layout_editor_absoluteX="120dp" />
+
+    <ImageView
+        android:id="@+id/ivProfileIcon"
+        android:layout_width="190dp"
+        android:layout_height="155dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.059"
+        app:srcCompat="@drawable/male_user_96px" />
+
+    <TextView
+        android:id="@+id/tvProfile"
+        android:layout_width="140dp"
+        android:layout_height="36dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="<Profile>"
+        android:textColor="#333333"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.293" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_input"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Log Out"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
