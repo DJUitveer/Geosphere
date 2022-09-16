@@ -8,24 +8,6 @@
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="293dp"
-        android:layout_height="62dp"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_email"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
-
-    <EditText
         android:id="@+id/etPassword"
         android:layout_width="293dp"
         android:layout_height="62dp"
@@ -37,12 +19,29 @@
         android:inputType="textPassword"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.543" />
+        app:layout_constraintVertical_bias="0.779" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="293dp"
+        android:layout_height="62dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/etPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.919" />
 
     <Button
         android:id="@+id/btnSignIn"
@@ -52,50 +51,52 @@
         android:fontFamily="sans-serif-black"
         android:text="Sign in"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_SignInText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.701" />
+        app:layout_constraintVertical_bias="0.94" />
+
     <ImageView
         android:id="@+id/ivLoginIcon"
         android:layout_width="177dp"
         android:layout_height="140dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.057"
-        app:srcCompat="@drawable/geosphere"/>
+        app:srcCompat="@drawable/geosphere" />
 
     <TextView
         android:id="@+id/tvSignUp"
-        android:layout_width="69dp"
-        android:layout_height="24dp"
+        android:layout_width="55dp"
+        android:layout_height="23dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Register"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.693"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.858" />
+        app:layout_constraintVertical_bias="0.878" />
 
     <TextView
         android:id="@+id/tv_SignInText"
-        android:layout_width="164dp"
-        android:layout_height="24dp"
+        android:layout_width="130dp"
+        android:layout_height="22dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="not registered as yet"
         android:textColor="@color/mapboxBlue"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
+        app:layout_constraintVertical_bias="0.878" />
 
     <TextView
         android:id="@+id/textView4"
@@ -109,11 +110,10 @@
         android:text="     Geo Sphere"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
+        app:layout_constraintVertical_bias="0.54" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
