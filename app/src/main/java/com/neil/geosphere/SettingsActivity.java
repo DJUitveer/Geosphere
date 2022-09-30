@@ -1,14 +1,41 @@
 package com.neil.geosphere;
 
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.RadioButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-
 public class SettingsActivity extends AppCompatActivity {
+    //Declaring components
+    private Button save, help, aboutUs, feedback, mode;
+    private RadioButton metric, imperial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        //Initializing Components
+        save = findViewById(R.id.btnSave);
+        help = findViewById(R.id.btnHelp);
+        aboutUs = findViewById(R.id.btnAboutUs);
+        feedback = findViewById(R.id.btnFeedback);
+        mode = findViewById(R.id.btnDarkMode);
+
+    }
+    public void UnitsOfMeasurementSave(){
+        //Todo: save the unit of measurement user chose
+    }
+    public void Help(){
+        //Todo: Help method
+    }
+    public void AboutUs(){
+        //Todo: Display About the devs information
+    }
+    public void Feedback(){
+        //Todo: Allow user to provide feedback on app
+    }
+    public void DarkModeLightMode(){
+        //Todo: Allow user to switch between light and dark mode
     }
 }

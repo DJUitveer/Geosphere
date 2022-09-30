@@ -16,8 +16,9 @@
         android:text="Delete Profile"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnAchievements"
-        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
-        tools:layout_editor_absoluteX="120dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
 
     <Button
         android:id="@+id/btnAchievements"
@@ -28,8 +29,9 @@
         android:text="Achievemet"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnHistory"
-        app:layout_constraintTop_toBottomOf="@+id/btnDeleteProfile"
-        tools:layout_editor_absoluteX="120dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDeleteProfile" />
 
     <Button
         android:id="@+id/btnHistory"
@@ -40,8 +42,9 @@
         android:text="History"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnLogout"
-        app:layout_constraintTop_toBottomOf="@+id/btnAchievements"
-        tools:layout_editor_absoluteX="120dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAchievements" />
 
     <Button
         android:id="@+id/btnEdit"
@@ -52,8 +55,9 @@
         android:text="Edit Profile"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnDeleteProfile"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfile"
-        tools:layout_editor_absoluteX="120dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfile" />
 
     <ImageView
         android:id="@+id/ivProfileIcon"
@@ -63,8 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059"
-        app:srcCompat="@drawable/male_user_96px" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <TextView
         android:id="@+id/tvProfile"
