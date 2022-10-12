@@ -1,6 +1,6 @@
 package com.neil.geosphere;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.neil.geosphere.Objects.CurrentUser;
 
 public class LoginActivity extends AppCompatActivity {
     //Declaring Components
@@ -41,13 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         signIn = findViewById(R.id.btnSignIn);
         register = findViewById(R.id.tvSignUp);
 
-        //getting user input when button is clicked
-        String userEmail = email.getText().toString();
-        String userPassword = password.getText().toString();
+        mAuth=FirebaseAuth.getInstance();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //getting user input when button is clicked
+                String userEmail = email.getText().toString();
+                String userPassword = password.getText().toString();
                 //register method
                 signUp(userEmail, userPassword);
             }
@@ -55,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //getting user input when button is clicked
+                String userEmail = email.getText().toString();
+                String userPassword = password.getText().toString();
                 //login method
                 login(userEmail, userPassword);
             }
@@ -62,26 +67,26 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //method to login using normal email and google
-    public void login(String email, String password) {
+    public void signUp(String email, String password) {
         //Method to prevent users entering blank data
         if ((email.isEmpty()) && (password.isEmpty())) {
             Toast.makeText(LoginActivity.this, "Please provide Sign Up details", Toast.LENGTH_SHORT).show();
         } else {
             mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener((Activity) LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(LoginActivity.this, "Sign Up Successful.", Toast.LENGTH_SHORT);
+                                Toast.makeText(LoginActivity.this, "Sign Up Successful.", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                //CurrentUser.currentUserKey = user.getUid();
+                                CurrentUser.UID = user.getUid();
 //                                Intent switchToSignUp = new Intent(MainActivity.this, SignUpActivity.class);
 //                                switchToSignUp.putExtra("LoginEmail", email);
 //                                startActivity(switchToSignUp);
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(LoginActivity.this, "createUserWithEmail:failure", Toast.LENGTH_SHORT);
+                                Toast.makeText(LoginActivity.this, "createUserWithEmail:failure", Toast.LENGTH_SHORT).show();
                                 Toast.makeText(LoginActivity.this, "Sign Up Failed.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -90,43 +95,47 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //method to signup using normal email
-    public void signUp(String email, String password) {
+    public void login(String email, String password) {
         //Firebase authentication to validate user log in details
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, display a message to the user and move to the next activity.
-                            Toast.makeText(LoginActivity.this, "signInWithEmail:success", Toast.LENGTH_LONG);
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            myRef.orderByChild("email").startAt(user.getEmail()).endAt(user.getEmail()).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                        //CurrentUser.currentUserKey=user.getUid();
-                                        Toast.makeText(LoginActivity.this, "User Logged in ", Toast.LENGTH_LONG);
+        if ((email.isEmpty()) && (password.isEmpty())) {
+            Toast.makeText(LoginActivity.this, "Please provide Login details", Toast.LENGTH_SHORT).show();
+        } else {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+
+                                // Sign in success, display a message to the user and move to the next activity.
+                                Toast.makeText(LoginActivity.this, "signInWithEmail:success", Toast.LENGTH_LONG);
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                myRef.orderByChild("email").startAt(user.getEmail()).endAt(user.getEmail()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                            CurrentUser.UID = user.getUid();
+                                            Toast.makeText(LoginActivity.this, "User Logged in ", Toast.LENGTH_LONG);
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
+                                    }
+                                });
 
-                            Toast.makeText(LoginActivity.this, "Login Successful.", Toast.LENGTH_SHORT).show();
-                            //Intent switchToMainMenu = new Intent(context, MainMenuActivity.class);
-                            //startActivity(switchToMainMenu);
-                            //search for user
+                                Toast.makeText(LoginActivity.this, "Login Successful.", Toast.LENGTH_SHORT).show();
+                                Intent switchToMainMenu = new Intent(LoginActivity.this, Main_Menu_Activity.class);
+                                startActivity(switchToMainMenu);
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Login Failed. Please enter correct Login details", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                //Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(LoginActivity.this, "Login Failed. Please enter correct Login details", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     //method to signup with google

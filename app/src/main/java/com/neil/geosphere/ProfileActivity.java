@@ -1,9 +1,12 @@
 package com.neil.geosphere;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileActivity extends AppCompatActivity {
     //Declaring Components
@@ -38,7 +41,9 @@ public class ProfileActivity extends AppCompatActivity {
         //Todo: History (mojo)
     }
 
+    //Method to Sign out the user
     public void LogOut() {
-        //Todo: Log Out (neil)
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
     }
 }
