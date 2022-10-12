@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         signIn = findViewById(R.id.btnSignIn);
         register = findViewById(R.id.tvSignUp);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Sign Up Successful.", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 CurrentUser.UID = user.getUid();
-//                                Intent switchToSignUp = new Intent(MainActivity.this, SignUpActivity.class);
-//                                switchToSignUp.putExtra("LoginEmail", email);
-//                                startActivity(switchToSignUp);
+                                startActivity(new Intent(LoginActivity.this, Main_Menu_Activity.class));
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(LoginActivity.this, "createUserWithEmail:failure", Toast.LENGTH_SHORT).show();
@@ -125,8 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                 });
 
                                 Toast.makeText(LoginActivity.this, "Login Successful.", Toast.LENGTH_SHORT).show();
-                                Intent switchToMainMenu = new Intent(LoginActivity.this, Main_Menu_Activity.class);
-                                startActivity(switchToMainMenu);
+                                startActivity(new Intent(LoginActivity.this, Main_Menu_Activity.class));
 
                             } else {
                                 // If sign in fails, display a message to the user.
