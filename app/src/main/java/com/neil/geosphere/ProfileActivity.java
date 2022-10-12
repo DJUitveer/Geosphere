@@ -50,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void ProfileHistory() {
-        //Todo: History (mojo)
+        //Todo: Take out
     }
 
     //Method to Sign out the user
