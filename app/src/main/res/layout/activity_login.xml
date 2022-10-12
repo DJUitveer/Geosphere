@@ -62,6 +62,7 @@
         android:id="@+id/ivLoginIcon"
         android:layout_width="177dp"
         android:layout_height="140dp"
+        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,43 +72,45 @@
 
     <TextView
         android:id="@+id/tvSignUp"
-        android:layout_width="55dp"
+        android:layout_width="wrap_content"
         android:layout_height="23dp"
+        android:clickable="true"
         android:fontFamily="@font/montserrat_bold"
         android:text="Register"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.693"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.878" />
+        app:layout_constraintVertical_bias="0.923" />
 
     <TextView
         android:id="@+id/tv_SignInText"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="not registered as yet"
+        android:text="Not registered as yet"
         android:textColor="@color/mapboxBlue"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.878" />
+        app:layout_constraintVertical_bias="0.891" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="247dp"
         android:layout_height="49dp"
         android:fontFamily="sans-serif-black"
+        android:gravity="center"
         android:shadowColor="#000000"
         android:shadowDx="5"
         android:shadowDy="4"
         android:shadowRadius="5"
-        android:text="     Geo Sphere"
+        android:text="Geo Sphere"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"

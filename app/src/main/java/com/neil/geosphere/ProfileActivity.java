@@ -23,22 +23,22 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void EditProfile() {
-        //Todo: Edit profile
+        //Todo: Edit profile (neil & creolin)
     }
 
     public void DeleteProfile() {
-        //Todo: Delete profile
+        //Todo: Delete profile (neil & creolin)
     }
 
     public void ProfileAchievements() {
-        //Todo: Achievements
+        //Todo: Achievements (final POE)
     }
 
     public void ProfileHistory() {
-        //Todo: History
+        //Todo: History (mojo)
     }
 
     public void LogOut() {
-        //Todo: Log Out
+        //Todo: Log Out (neil)
     }
 }

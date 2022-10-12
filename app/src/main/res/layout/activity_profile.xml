@@ -74,7 +74,7 @@
         android:layout_width="140dp"
         android:layout_height="36dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="<Profile>"
+        android:text="Profile"
         android:textColor="#333333"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

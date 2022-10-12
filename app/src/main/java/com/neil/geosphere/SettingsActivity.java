@@ -24,18 +24,19 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
     public void UnitsOfMeasurementSave(){
-        //Todo: save the unit of measurement user chose
+        //Todo: save the unit of measurement user chose (neil & creolin)
     }
     public void Help(){
-        //Todo: Help method
+        //Todo: Help method (neil & creolin)
     }
     public void AboutUs(){
-        //Todo: Display About the devs information
+        //Todo: Display About the devs information (neil & creolin)
     }
     public void Feedback(){
-        //Todo: Allow user to provide feedback on app
+        //Todo: Allow user to provide feedback on app (neil & creolin)
+        //code from solid puck app (reference)
     }
     public void DarkModeLightMode(){
-        //Todo: Allow user to switch between light and dark mode
+        //Todo: Allow user to switch between light and dark mode (neil & creolin)
     }
 }
