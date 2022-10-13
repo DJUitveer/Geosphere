@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.059"
-        app:srcCompat="@drawable/settings_96px" />
+        app:srcCompat="@drawable/settings" />
 
     <TextView
         android:id="@+id/tvSettings"

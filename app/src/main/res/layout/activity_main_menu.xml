@@ -4,29 +4,303 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main_Menu_Activity">
-    <!--ToDo: Implement the UI Design(creolin & Mojo)-->
-    <Button
-        android:id="@+id/btnSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+    tools:context=".Main_Menu_Activity"
+    android:background="@drawable/geosphere_bg_light">
 
-    <Button
-        android:id="@+id/btnProfile"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:theme="?attr/actionBarTheme"
+        android:background="#E8FFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintTop_toTopOf="parent">
+
+<!--TODO: ADD CUSTOM BUTTONS-->
+        <Button
+            android:id="@+id/clickBtn"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:text="..."
+            android:textColor="#0C0E3A"
+            android:textSize="20dp"
+            android:backgroundTint="#E8FFFF"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:text="GeoSphere"
+            android:textStyle="bold"
+            android:textColor="#0C0E3A"
+            android:textSize="25dp"
+            android:backgroundTint="#E8FFFF"/>
+
+        <ImageButton
+            android:id="@+id/btn_details"
+            android:layout_width="70sp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:textSize="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/scv_main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:id="@+id/lin_main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crv_main_menu_open_map"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="30dp"
+                android:backgroundTint="#99FFFFFF"
+                android:padding="10dp"
+                android:clickable="true"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/col_main_menu_open_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="98dp">
+
+                    <ImageView
+                        android:id="@+id/imv_main_menu_open_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/location_tag"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txv_main_menu_open_map"
+                        app:layout_constraintHorizontal_bias="0.33"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.507" />
+
+                    <TextView
+                        android:id="@+id/txv_main_menu_open_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="68dp"
+                        android:fontFeatureSettings="rob"
+                        android:text="Open Map"
+                        android:textColor="#0C0E3A"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.502" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crv_main_menu_open_bookmarked"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="30dp"
+                android:backgroundTint="#99FFFFFF"
+                android:padding="10dp"
+                android:clickable="true"
+                app:cardCornerRadius="20dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/col_main_menu_open_bookmarked"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="98dp">
+
+                    <ImageView
+                        android:id="@+id/imv_main_menu_open_bookmarked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bookmarks"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txv_main_menu_open_bookmarked"
+                        app:layout_constraintHorizontal_bias="0.368"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txv_main_menu_open_bookmarked"
+                        android:layout_width="141dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="44dp"
+                        android:fontFeatureSettings="rob"
+                        android:text="Bookmarked Landmarks"
+                        android:textAlignment="center"
+                        android:textColor="#0C0E3A"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:flow_verticalAlign="center"
+                        app:flow_wrapMode="aligned"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.503" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crv_main_menu_nearby"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="30dp"
+                android:backgroundTint="#99FFFFFF"
+                android:padding="10dp"
+                android:clickable="true"
+                app:cardCornerRadius="20dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/col_main_menu_nearby"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="98dp">
+
+                    <ImageView
+                        android:id="@+id/imv_main_menu_nearby"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/nearby"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txv_main_menu_nearby"
+                        app:layout_constraintHorizontal_bias="0.368"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txv_main_menu_nearby"
+                        android:layout_width="141dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="44dp"
+                        android:fontFeatureSettings="rob"
+                        android:text="Nearby Landmarks"
+                        android:textAlignment="center"
+                        android:textColor="#0C0E3A"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:flow_verticalAlign="center"
+                        app:flow_wrapMode="aligned"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.503" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crv_main_menu_settings"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="30dp"
+                android:backgroundTint="#99FFFFFF"
+                android:padding="10dp"
+                android:clickable="true"
+                app:cardCornerRadius="20dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/col_main_menu_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="98dp">
+
+                    <ImageView
+                        android:id="@+id/imv_main_menu_settings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/settings"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txv_main_menu_settings"
+                        app:layout_constraintHorizontal_bias="0.368"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txv_main_menu_settings"
+                        android:layout_width="141dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="44dp"
+                        android:fontFeatureSettings="rob"
+                        android:text="Settings"
+                        android:textAlignment="center"
+                        android:textColor="#0C0E3A"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:flow_verticalAlign="center"
+                        app:flow_wrapMode="aligned"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.503" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crv_main_menu_profile"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="30dp"
+                android:backgroundTint="#99FFFFFF"
+                android:padding="10dp"
+                android:clickable="true"
+                app:cardCornerRadius="20dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/col_main_menu_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="22dp"
+                    tools:layout_editor_absoluteY="98dp">
+
+                    <ImageView
+                        android:id="@+id/imv_main_menu_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/profile"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/txv_main_menu_profile"
+                        app:layout_constraintHorizontal_bias="0.393"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.78" />
+
+                    <TextView
+                        android:id="@+id/txv_main_menu_profile"
+                        android:layout_width="141dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="44dp"
+                        android:fontFeatureSettings="rob"
+                        android:text="Profile"
+                        android:textAlignment="center"
+                        android:textColor="#0C0E3A"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:flow_verticalAlign="center"
+                        app:flow_wrapMode="aligned"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.503" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
