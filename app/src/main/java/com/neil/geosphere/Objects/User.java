@@ -53,8 +53,4 @@ public class User {
         this.password = password;
     }
 
-    //password hashing method
-    public void hashPassword(String password) {
-        //Todo: hash password
-    }
 }

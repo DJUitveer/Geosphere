@@ -1,9 +1,10 @@
 package com.neil.geosphere;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -12,7 +13,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.neil.geosphere.databinding.ActivityMapsBinding;
 
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -30,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -44,8 +48,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(-29.7718824, 31.0370521);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //https://stackoverflow.com/questions/14157536/how-do-i-set-default-location-and-zoom-level-for-google-map-api-v2
+        CameraUpdate cameraPosition = CameraUpdateFactory.newLatLngZoom(sydney, 17);
+        mMap.moveCamera(cameraPosition);
+
+
     }
+
 }
