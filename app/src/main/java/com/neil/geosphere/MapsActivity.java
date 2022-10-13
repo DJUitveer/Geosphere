@@ -33,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+    //TODO: Get Device Location and set it to the map on load
 
     /**
      * Manipulates the map once available.
