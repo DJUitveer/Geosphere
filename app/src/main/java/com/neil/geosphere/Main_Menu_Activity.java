@@ -2,17 +2,13 @@ package com.neil.geosphere;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -28,9 +24,7 @@ public class Main_Menu_Activity extends AppCompatActivity {
     //Declaring components
     private CardView settings, profile, map, bookmark, nearby;
     private boolean mLocationPermision = false;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private String TAG = "GeoLoaction:";
-    private static final int REQUEST=112;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +35,6 @@ public class Main_Menu_Activity extends AppCompatActivity {
         settings = findViewById(R.id.crv_main_menu_settings);
         profile = findViewById(R.id.crv_main_menu_profile);
         nearby = findViewById(R.id.crv_main_menu_nearby);
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,13 +53,7 @@ public class Main_Menu_Activity extends AppCompatActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] PERMISSIONS = {android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION};
-                if (ActivityCompat.checkSelfPermission(Main_Menu_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Main_Menu_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                  ActivityCompat.requestPermissions((Activity) Main_Menu_Activity.this,PERMISSIONS,REQUEST);
-                }else{
-                    GetLastGeoLocation();
-                    ToMap();
-                }
+                ToMap();
             }
         });
 
@@ -106,7 +92,7 @@ public class Main_Menu_Activity extends AppCompatActivity {
 
     //method to switch to the Map page
     public void ToMap() {
-        GetLastGeoLocation();
+//        GetLastGeoLocation();
         Intent ToMap = new Intent(Main_Menu_Activity.this, MapsActivity.class);
         startActivity(ToMap);
     }
@@ -117,21 +103,4 @@ public class Main_Menu_Activity extends AppCompatActivity {
         startActivity(ToNearbyLocations);
     }
 
-    @SuppressLint("MissingPermission")
-    private void GetLastGeoLocation() {
-        if (ActivityCompat.checkSelfPermission(Main_Menu_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Main_Menu_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful()) {
-                    Location location = task.getResult();
-                    GeoPoint geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
-                    Log.i(TAG, String.valueOf(geoPoint.getLatitude()));
-                    Log.i(TAG, String.valueOf(geoPoint.getLongitude()));
-                }
-            }
-        });
-    }
 }
