@@ -7,6 +7,49 @@
     android:background="@drawable/background_blue_light"
     tools:context=".SettingsActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="?attr/actionBarTheme"
+        android:background="#E8FFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--TODO: ADD CUSTOM BUTTONS-->
+        <Button
+            android:id="@+id/clickBtn"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:text="..."
+            android:textColor="#0C0E3A"
+            android:textSize="20dp"
+            android:backgroundTint="#E8FFFF"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:text="GeoSphere"
+            android:textStyle="bold"
+            android:textColor="#0C0E3A"
+            android:textSize="25dp"
+            android:backgroundTint="#E8FFFF"/>
+
+        <ImageButton
+            android:id="@+id/btn_details"
+            android:layout_width="70sp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:textSize="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
     <ImageView
         android:id="@+id/ivSettingsIcon"
         android:layout_width="119dp"
@@ -14,8 +57,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.021"
         app:srcCompat="@drawable/settings" />
 
     <TextView
@@ -24,33 +67,36 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
         android:text="SETTINGS"
-        android:textColor="#333333"
+        android:textColor="#0C0E3A"
         android:textSize="30sp"
         android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintTop_toBottomOf="@+id/ivSettingsIcon"
+        app:layout_constraintVertical_bias="0.031" />
+
 
     <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
+        android:id="@+id/rg_settings_unit_type"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#3B3F59A8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45">
+        app:layout_constraintTop_toBottomOf="@+id/tvSettings"
+        app:layout_constraintVertical_bias="0.084">
 
         <RadioButton
-            android:id="@+id/rbMetric"
+            android:id="@+id/rb_settings_Metric"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
+            android:textColor="#0C0E3A"
             android:buttonTint="@color/white"
             android:checked="true"
             android:fontFamily="@font/montserrat_bold"
@@ -63,11 +109,11 @@
             app:layout_constraintVertical_bias="0.414" />
 
         <RadioButton
-            android:id="@+id/rbImperial"
+            android:id="@+id/rb_settings_imperial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
             android:buttonTint="@color/white"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Imperial"
             android:textSize="19dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,77 +123,90 @@
 
     </RadioGroup>
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="143dp"
-        android:layout_height="45dp"
-        android:background="@drawable/custom_input"
-        android:backgroundTint="@color/translucent"
+    <TextView
+        android:id="@+id/txv_settings_landmark_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="#3BFFFFFF"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Default Landmark filter:"
+        android:textColor="#0C0E3A"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_settings_unit_type"
+        app:layout_constraintVertical_bias="0.067" />
+
+    <Spinner
+        android:id="@+id/spn_settings_Landmark_type"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:background="#0C0E3A"
+        android:contentDescription="Select Landmark type you want to view"
+        android:foreground="white"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_settings_landmark_type" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_settings_save"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#5BFFFFFF"
         android:fontFamily="@font/montserrat_bold"
         android:text="Save"
-        android:textColor="@color/white"
+        android:textColor="#0C0E3A"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.688" />
+        app:layout_constraintTop_toBottomOf="@+id/spn_settings_Landmark_type"
+        app:layout_constraintVertical_bias="0.423"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
-    <Button
-        android:id="@+id/btnAboutUs"
-        android:layout_width="143dp"
-        android:layout_height="45dp"
-        android:background="@drawable/custom_input"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_settings_about_us"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#5BFFFFFF"
+        app:cornerRadius="30dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="About Us"
+        android:text="about us"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        android:textColor="#0C0E3A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_settings_save"
+        app:layout_constraintVertical_bias="0.67" />
 
-    <Button
-        android:id="@+id/btnHelp"
-        android:layout_width="143dp"
-        android:layout_height="45dp"
-        android:background="@drawable/custom_input"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_settings_help"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#5BFFFFFF"
+        app:cornerRadius="30dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="help"
+        android:text="Help"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        android:textColor="#0C0E3A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.911" />
-
-    <Button
-        android:id="@+id/btnDarkMode"
-        android:layout_width="143dp"
-        android:layout_height="45dp"
-        android:background="@drawable/custom_input"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="DarkMode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.906"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.912" />
-
-    <Button
-        android:id="@+id/btnFeedback"
-        android:layout_width="143dp"
-        android:layout_height="45dp"
-        android:background="@drawable/custom_input"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Feedback"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.906"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_settings_save"
+        app:layout_constraintVertical_bias="0.67" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
