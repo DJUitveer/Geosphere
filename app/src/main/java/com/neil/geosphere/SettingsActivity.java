@@ -3,7 +3,6 @@ package com.neil.geosphere;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -86,45 +85,36 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         });
 
     }
-public void GetUserSettings(){
-    String uid = fAuth.getCurrentUser().getUid();
+
+    public void GetUserSettings() {
+        String uid = fAuth.getCurrentUser().getUid();
         fStore.collection("UserSettings").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                 DocumentSnapshot document=task.getResult();
-                 Settings getSettings=document.toObject(Settings.class);
-                 String landmarkType=  getSettings.getLandmarkType();
-                 String unitType = getSettings.getUnitOfMeasurement();
-                metric = findViewById(R.id.rb_settings_Metric);
-                imperial = findViewById(R.id.rb_settings_imperial);
-                typeOfLandMark = findViewById(R.id.spn_settings_Landmark_type);
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    Settings getSettings = document.toObject(Settings.class);
+                    String landmarkType = getSettings.getLandmarkType();
+                    String unitType = getSettings.getUnitOfMeasurement();
+                    metric = findViewById(R.id.rb_settings_Metric);
+                    imperial = findViewById(R.id.rb_settings_imperial);
+                    typeOfLandMark = findViewById(R.id.spn_settings_Landmark_type);
 
-
-                 if (unitType.equals("Metric"))
-                 {
-                     metric.setChecked(true);
-                 }
-                 else
-                {
-                    imperial.setChecked(true);
-                }
-
-
-                for (int i = 0; i < typeOfLandMark.getCount(); i++) {
-                    if (typeOfLandMark.getItemAtPosition(i).toString().equals(landmarkType))
-                    {
-                        typeOfLandMark.setSelection(i);
+                    if (unitType.equals("Metric")) {
+                        metric.setChecked(true);
+                    } else {
+                        imperial.setChecked(true);
                     }
-                }
 
-
-
-                 //Todo: Get data and set it to settings page
+                    for (int i = 0; i < typeOfLandMark.getCount(); i++) {
+                        if (typeOfLandMark.getItemAtPosition(i).toString().equals(landmarkType)) {
+                            typeOfLandMark.setSelection(i);
+                        }
+                    }
                 }
             }
         });
-}
+    }
 
     public void Help() {
         //Todo: Help method (neil & creolin)
