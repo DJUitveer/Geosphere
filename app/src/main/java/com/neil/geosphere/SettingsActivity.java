@@ -43,10 +43,10 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         metric = findViewById(R.id.rb_settings_Metric);
         imperial = findViewById(R.id.rb_settings_imperial);
 
-
-
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+
+        GetUserSettings();
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +94,32 @@ public void GetUserSettings(){
                 if (task.isSuccessful()){
                  DocumentSnapshot document=task.getResult();
                  Settings getSettings=document.toObject(Settings.class);
-                 getSettings.
+                 String landmarkType=  getSettings.getLandmarkType();
+                 String unitType = getSettings.getUnitOfMeasurement();
+                metric = findViewById(R.id.rb_settings_Metric);
+                imperial = findViewById(R.id.rb_settings_imperial);
+                typeOfLandMark = findViewById(R.id.spn_settings_Landmark_type);
+
+
+                 if (unitType.equals("Metric"))
+                 {
+                     metric.setChecked(true);
+                 }
+                 else
+                {
+                    imperial.setChecked(true);
+                }
+
+
+                for (int i = 0; i < typeOfLandMark.getCount(); i++) {
+                    if (typeOfLandMark.getItemAtPosition(i).toString().equals(landmarkType))
+                    {
+                        typeOfLandMark.setSelection(i);
+                    }
+                }
+
+
+
                  //Todo: Get data and set it to settings page
                 }
             }
