@@ -11,8 +11,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="?attr/actionBarTheme"
         android:background="#E8FFFF"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,10 +21,10 @@
             android:id="@+id/clickBtn"
             android:layout_width="60dp"
             android:layout_height="70dp"
+            android:backgroundTint="#E8FFFF"
             android:text="..."
             android:textColor="#0C0E3A"
             android:textSize="20dp"
-            android:backgroundTint="#E8FFFF"
             android:textStyle="bold" />
 
         <Button
@@ -32,20 +32,20 @@
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
+            android:backgroundTint="#E8FFFF"
             android:text="GeoSphere"
-            android:textStyle="bold"
             android:textColor="#0C0E3A"
             android:textSize="25dp"
-            android:backgroundTint="#E8FFFF"/>
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/btn_details"
             android:layout_width="70sp"
             android:layout_height="70dp"
             android:layout_gravity="end"
-            android:textSize="20dp"
             android:scaleType="fitXY"
-            android:src="@drawable/icon"/>
+            android:src="@drawable/icon"
+            android:textSize="20dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -96,11 +96,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:textColor="#0C0E3A"
             android:buttonTint="@color/white"
             android:checked="true"
             android:fontFamily="@font/montserrat_bold"
             android:text="Metric"
+            android:textColor="#0C0E3A"
             android:textSize="19dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,12 +143,12 @@
 
     <Spinner
         android:id="@+id/spn_settings_Landmark_type"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginTop="12dp"
-        android:background="#0C0E3A"
+        android:background="@android:color/white"
         android:contentDescription="Select Landmark type you want to view"
-        android:foreground="white"
+        android:entries="@array/landmarkFilterArray"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -177,36 +177,36 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:backgroundTint="#5BFFFFFF"
-        app:cornerRadius="30dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="about us"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp"
         android:textColor="#0C0E3A"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_settings_save"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.67"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_settings_help"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:backgroundTint="#5BFFFFFF"
-        app:cornerRadius="30dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Help"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp"
         android:textColor="#0C0E3A"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_settings_save"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.67"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
