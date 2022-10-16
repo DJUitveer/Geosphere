@@ -1,29 +1,26 @@
 package com.neil.geosphere;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.neil.geosphere.Objects.CurrentUser;
+import com.neil.geosphere.Objects.Settings;
 
 public class Main_Menu_Activity extends AppCompatActivity {
     //Declaring components
     private CardView settings, profile, map, bookmark, nearby;
-    private boolean mLocationPermision = false;
+    private FirebaseFirestore fStore;
+    private FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +32,9 @@ public class Main_Menu_Activity extends AppCompatActivity {
         settings = findViewById(R.id.crv_main_menu_settings);
         profile = findViewById(R.id.crv_main_menu_profile);
         nearby = findViewById(R.id.crv_main_menu_nearby);
-
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        getUserFilteredLocations();
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,4 +102,19 @@ public class Main_Menu_Activity extends AppCompatActivity {
         startActivity(ToNearbyLocations);
     }
 
+    private void getUserFilteredLocations() {
+        String uid = fAuth.getCurrentUser().getUid();
+        fStore.collection("UserSettings").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    Settings getSettings = document.toObject(Settings.class);
+                    String landmarkType = getSettings.getLandmarkType();
+                    CurrentUser.userFilterSetting = landmarkType;
+                }
+            }
+        });
+
+    }
 }

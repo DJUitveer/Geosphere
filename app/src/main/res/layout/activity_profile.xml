@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/pop_bg"
     tools:context=".ProfileActivity">
-
+    <!--Todo: fix UI and do registration(history and achievement to be removed)-->
     <Button
         android:id="@+id/btnDeleteProfile"
         android:layout_width="171dp"

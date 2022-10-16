@@ -16,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--TODO: ADD CUSTOM BUTTONS-->
         <Button
             android:id="@+id/clickBtn"
             android:layout_width="60dp"

@@ -136,9 +136,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //method to signup with google
-    public void googleSignUp() {
-        //Todo: Google signup method (nikshay)
-    }
-
 }

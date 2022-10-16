@@ -45,14 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
         //Todo: Delete profile (neil & creolin)
     }
 
-    public void ProfileAchievements() {
-        //Todo: Achievements (final POE)
-    }
-
-    public void ProfileHistory() {
-        //Todo: Take out
-    }
-
     //Method to Sign out the user
     public void LogOut() {
         FirebaseAuth.getInstance().signOut();

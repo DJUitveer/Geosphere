@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.neil.geosphere.Objects.CurrentUser;
 import com.neil.geosphere.Objects.Settings;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -109,6 +110,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                     for (int i = 0; i < typeOfLandMark.getCount(); i++) {
                         if (typeOfLandMark.getItemAtPosition(i).toString().equals(landmarkType)) {
                             typeOfLandMark.setSelection(i);
+                            CurrentUser.userFilterSetting = landmarkType;
                         }
                     }
                 }
