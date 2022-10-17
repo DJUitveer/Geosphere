@@ -23,10 +23,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         mAuth = FirebaseAuth.getInstance();
         //Initializing Components
-        edit = findViewById(R.id.btnEdit);
-        delete = findViewById(R.id.btnDeleteProfile);
-        achievements = findViewById(R.id.btnAchievements);
-        history = findViewById(R.id.btnHistory);
         logOut = findViewById(R.id.btnLogout);
 
         logOut.setOnClickListener(new View.OnClickListener() {
