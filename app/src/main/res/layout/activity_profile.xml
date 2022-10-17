@@ -59,9 +59,9 @@
             android:id="@+id/clickBtn"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:backgroundTint="#E8FFFF"
+            android:backgroundTint="@color/geosphere_blue_light"
             android:text="..."
-            android:textColor="#0C0E3A"
+            android:textColor="@color/geosphere_blue_dark"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
         android:id="@+id/tvProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Profile"
         android:textColor="#333333"

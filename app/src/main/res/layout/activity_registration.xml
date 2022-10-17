@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txv_sign_up_disp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="left">
+                    <TextView
+                        android:id="@+id/txv_name_disp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name : "
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txv_surname_disp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Surname : "
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txv_email_disp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="email : "
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/txv_username_disp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Username : "
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txv_unit_type_disp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unit type : "
+                        android:gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txv_landmark_type_disp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/translucent"
+                        android:text="Landmark type : "
+                        android:gravity="center"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginBottom="20dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="right">
+                    <EditText
+                        android:id="@+id/txv_name_input"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="10sp"
+                        android:textColorHint="@color/translucent_med"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="eg.Peter"
+                        android:inputType="text"/>
+                    <EditText
+                        android:id="@+id/txv_surname_input"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="10sp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="eg. Parker"
+                        android:inputType="text"/>
+                    <TextView
+                        android:id="@+id/txv_email_input"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="10sp"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <EditText
+                        android:id="@+id/txv_username_input"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginBottom="10sp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:hint="eg.Spiderman123"
+                        android:inputType="text"/>
+
+                    <RadioGroup
+                        android:id="@+id/rg_profile_unit_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/translucent_blue"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvSettings"
+                        app:layout_constraintVertical_bias="0.084">
+
+                        <RadioButton
+                            android:id="@+id/rb_profile_Metric"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:buttonTint="@color/white"
+                            android:checked="false"
+                            android:text="Metric"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.414" />
+
+                        <RadioButton
+                            android:id="@+id/rb_profile_imperial"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/white"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:checked="false"
+                            android:text="Imperial"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </RadioGroup>
+
+                    <Spinner
+                        android:id="@+id/spn_profile_Landmark_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginHorizontal="20sp"
+                        android:background="@color/translucent_med"
+                        android:contentDescription="Select Landmark type you want to view"
+                        android:entries="@array/landmarkFilterArray"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/chbxPermission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="I allow my infomration to be saved and used" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_register_save"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/translucent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Save"
+                android:textColor="@color/geosphere_blue_dark"
+                app:cornerRadius="30dp"
+                android:layout_gravity="center"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

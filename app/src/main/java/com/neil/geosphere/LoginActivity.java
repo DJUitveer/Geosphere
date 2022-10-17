@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 String userPassword = password.getText().toString();
                 //register method
                 signUp(userEmail, userPassword);
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
             }
         });
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "SignUp Successful. LogIn Successful", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 CurrentUser.UID = user.getUid();
-                                startActivity(new Intent(LoginActivity.this, Main_Menu_Activity.class));
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(LoginActivity.this, "createUserWithEmail:failure", Toast.LENGTH_SHORT).show();
