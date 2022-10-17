@@ -75,7 +75,7 @@
         android:layout_marginBottom="120dp"
         android:backgroundTint="@color/translucent"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Save"
+        android:text="Login"
         android:textColor="@color/geosphere_blue_dark"
         app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
