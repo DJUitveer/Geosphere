@@ -4,13 +4,19 @@ import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -22,15 +28,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.neil.geosphere.Objects.CurrentUser;
-import com.neil.geosphere.Objects.Settings;
 import com.neil.geosphere.Util.FetchData;
 import com.neil.geosphere.databinding.ActivityMapsBinding;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -49,20 +58,53 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FirebaseAuth fAuth;
     private StringBuilder stringBuilder = new StringBuilder
             ("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            return;
+        } else {
+            binding = ActivityMapsBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getApplicationContext());
+            fAuth = FirebaseAuth.getInstance();
+            fStore = FirebaseFirestore.getInstance();
+            searchView = findViewById(R.id.sv_Find_Places);
+            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
 
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getApplicationContext());
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    String location = searchView.getQuery().toString();
+                    List<Address> addressList = null;
+                    if (location != null || location.equals("")) {
+                        Geocoder geocoder = new Geocoder(MapsActivity.this);
+                        try {
+                            addressList = geocoder.getFromLocationName(location, 1);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Address address = addressList.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        String placeID = address.getAddressLine(0);
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(location).snippet(placeID));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+
+            mapFragment.getMapAsync(this);
+        }
 
     }
 
@@ -73,8 +115,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getLocationPermission();
         updateLocationUI();
         getDeviceLocation();
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                String markerName = marker.getTitle();
+                String snippet = marker.getSnippet();
+                AlertDialogForMarkerClick(markerName, snippet);
+                return false;
+            }
+        });
+//https://maps.googleapis.com/maps/api/directions/json?origin=31.037042,-29.771891&destination=31.0356,-29.7968&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
+    }//https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
 
-
+    //method to display an alert dialog when a marker is selected
+    private void AlertDialogForMarkerClick(String markerName, String snippet) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+        builder.setTitle("Navigate");
+        builder.setMessage("Do you want to navigate to " + markerName);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (Dialog, which) -> {
+            Toast.makeText(MapsActivity.this, "Clicked on " + markerName + " with response YES", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MapsActivity.this, "snippet= " + snippet, Toast.LENGTH_SHORT).show();
+        });
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (Dialog, which) -> {
+            Toast.makeText(MapsActivity.this, "Clicked on " + markerName + " with response NO", Toast.LENGTH_SHORT).show();
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void getFilteredLocations() {
@@ -84,7 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         stringBuilder.append("&sensor=true");
         stringBuilder.append("&key=" + BuildConfig.MAPS_API_KEY);
         String url = stringBuilder.toString();
-//https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-29,31&radius=1000&type=hospital&sensor=true&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
+//https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-29.7718778,31.0370528&radius=5000&type=Popular&sensor=true&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
         Object datafetch[] = new Object[2];
         datafetch[0] = mMap;
         datafetch[1] = url;

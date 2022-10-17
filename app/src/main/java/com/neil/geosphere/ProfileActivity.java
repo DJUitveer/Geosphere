@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
     //Declaring Components
-    private Button edit, delete, achievements, history, logOut;
+    private Button  logOut;
 
     private FirebaseAuth mAuth;
 
@@ -23,10 +23,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         mAuth = FirebaseAuth.getInstance();
         //Initializing Components
-        edit = findViewById(R.id.btnEdit);
-        delete = findViewById(R.id.btnDeleteProfile);
-        achievements = findViewById(R.id.btnAchievements);
-        history = findViewById(R.id.btnHistory);
         logOut = findViewById(R.id.btnLogout);
 
         logOut.setOnClickListener(new View.OnClickListener() {
