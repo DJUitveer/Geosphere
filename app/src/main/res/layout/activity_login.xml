@@ -4,31 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_blue_light"
     tools:context=".LoginActivity">
+
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="293dp"
         android:layout_height="62dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_password"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColorHint="@color/text_hint_gray_dark"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="293dp"
         android:layout_height="62dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
@@ -37,37 +38,38 @@
         android:inputType="textEmailAddress"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/etPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.919" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignIn"
-        android:layout_width="132dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
-        android:background="@drawable/custom_input"
-        android:fontFamily="sans-serif-black"
-        android:text="Sign in"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_SignInText"
+        android:layout_marginBottom="120dp"
+        android:backgroundTint="@color/translucent"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Save"
+        android:textColor="@color/geosphere_blue_dark"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        app:layout_constraintVertical_bias="0.625"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
     <ImageView
         android:id="@+id/ivLoginIcon"
         android:layout_width="177dp"
         android:layout_height="140dp"
+        android:layout_marginTop="56dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057"
         app:srcCompat="@drawable/icon" />
 
     <TextView
@@ -80,10 +82,9 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_SignInText"
+        app:layout_constraintVertical_bias="0.22" />
 
     <TextView
         android:id="@+id/tv_SignInText"
@@ -91,19 +92,20 @@
         android:layout_height="22dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Not registered as yet"
-        android:textColor="@color/mapboxBlue"
+        android:textColor="@color/geosphere_blue_light"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.891" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
+        app:layout_constraintVertical_bias="0.18" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="247dp"
         android:layout_height="49dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:shadowColor="#000000"
@@ -113,10 +115,8 @@
         android:text="Geo Sphere"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.54" />
+        app:layout_constraintTop_toBottomOf="@+id/ivLoginIcon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

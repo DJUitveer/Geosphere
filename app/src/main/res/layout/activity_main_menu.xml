@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main_Menu_Activity"
-    android:background="@drawable/geosphere_bg_light">
+    tools:context=".Main_Menu_Activity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="?attr/actionBarTheme"
-        android:background="#E8FFFF"
+        android:background="@color/geosphere_blue_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,9 +20,9 @@
             android:layout_width="60dp"
             android:layout_height="70dp"
             android:text="..."
-            android:textColor="#0C0E3A"
+            android:textColor="@color/geosphere_blue_dark"
             android:textSize="20dp"
-            android:backgroundTint="#E8FFFF"
+            android:backgroundTint="@color/geosphere_blue_light"
             android:textStyle="bold" />
 
         <Button
@@ -33,15 +32,16 @@
             android:layout_gravity="center"
             android:text="GeoSphere"
             android:textStyle="bold"
-            android:textColor="#0C0E3A"
+            android:textColor="@color/geosphere_blue_dark"
             android:textSize="25dp"
-            android:backgroundTint="#E8FFFF"/>
+            android:backgroundTint="@color/geosphere_blue_light"/>
 
         <ImageButton
             android:id="@+id/btn_details"
             android:layout_width="70sp"
             android:layout_height="70dp"
             android:layout_gravity="end"
+            android:backgroundTint="@color/translucent"
             android:textSize="20dp"
             android:scaleType="fitXY"
             android:src="@drawable/icon"/>
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="30dp"
-                android:backgroundTint="#99FFFFFF"
+                android:backgroundTint="@color/translucent_med"
                 android:padding="10dp"
                 android:clickable="true"
                 app:cardCornerRadius="20dp">
@@ -99,7 +99,7 @@
                         android:layout_marginEnd="68dp"
                         android:fontFeatureSettings="rob"
                         android:text="Open Map"
-                        android:textColor="#0C0E3A"
+                        android:textColor="@color/geosphere_blue_dark"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="30dp"
-                android:backgroundTint="#99FFFFFF"
+                android:backgroundTint="@color/translucent_med"
                 android:padding="10dp"
                 android:clickable="true"
                 app:cardCornerRadius="20dp">
@@ -144,7 +144,7 @@
                         android:fontFeatureSettings="rob"
                         android:text="Bookmarked Landmarks"
                         android:textAlignment="center"
-                        android:textColor="#0C0E3A"
+                        android:textColor="@color/geosphere_blue_dark"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         app:flow_verticalAlign="center"
@@ -157,53 +157,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/crv_main_menu_nearby"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="30dp"
-                android:backgroundTint="#99FFFFFF"
-                android:padding="10dp"
-                android:clickable="true"
-                app:cardCornerRadius="20dp">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/col_main_menu_nearby"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout_editor_absoluteX="22dp"
-                    tools:layout_editor_absoluteY="98dp">
 
-                    <ImageView
-                        android:id="@+id/imv_main_menu_nearby"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/nearby"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/txv_main_menu_nearby"
-                        app:layout_constraintHorizontal_bias="0.368"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txv_main_menu_nearby"
-                        android:layout_width="141dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="44dp"
-                        android:fontFeatureSettings="rob"
-                        android:text="Nearby Landmarks"
-                        android:textAlignment="center"
-                        android:textColor="#0C0E3A"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        app:flow_verticalAlign="center"
-                        app:flow_wrapMode="aligned"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.503" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/crv_main_menu_settings"
@@ -240,7 +194,7 @@
                         android:fontFeatureSettings="rob"
                         android:text="Settings"
                         android:textAlignment="center"
-                        android:textColor="#0C0E3A"
+                        android:textColor="@color/geosphere_blue_dark"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         app:flow_verticalAlign="center"
@@ -257,7 +211,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="30dp"
-                android:backgroundTint="#99FFFFFF"
+                android:backgroundTint="@color/translucent_med"
                 android:padding="10dp"
                 android:clickable="true"
                 app:cardCornerRadius="20dp">
@@ -288,7 +242,7 @@
                         android:fontFeatureSettings="rob"
                         android:text="Profile"
                         android:textAlignment="center"
-                        android:textColor="#0C0E3A"
+                        android:textColor="@color/geosphere_blue_dark"
                         android:textSize="20dp"
                         android:textStyle="bold"
                         app:flow_verticalAlign="center"

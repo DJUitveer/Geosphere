@@ -5,5 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BookmarkedLocationsActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="?attr/actionBarTheme"
+        android:background="@color/geosphere_blue_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/clickBtn"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:text="..."
+            android:textColor="@color/geosphere_blue_dark"
+            android:textSize="20dp"
+            android:backgroundTint="@color/geosphere_blue_light"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/Name"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:text="GeoSphere"
+            android:textStyle="bold"
+            android:textColor="@color/geosphere_blue_dark"
+            android:textSize="25dp"
+            android:backgroundTint="@color/geosphere_blue_light"/>
+
+        <ImageButton
+            android:id="@+id/btn_details"
+            android:layout_width="70sp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/translucent"
+            android:textSize="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon"/>
+
+    </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

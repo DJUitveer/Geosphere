@@ -18,7 +18,7 @@ import com.neil.geosphere.Objects.Settings;
 
 public class Main_Menu_Activity extends AppCompatActivity {
     //Declaring components
-    private CardView settings, profile, map, bookmark, nearby;
+    private CardView settings, profile, map, bookmark;
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
 
@@ -31,7 +31,6 @@ public class Main_Menu_Activity extends AppCompatActivity {
         bookmark = findViewById(R.id.crv_main_menu_open_bookmarked);
         settings = findViewById(R.id.crv_main_menu_settings);
         profile = findViewById(R.id.crv_main_menu_profile);
-        nearby = findViewById(R.id.crv_main_menu_nearby);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         getUserFilteredLocations();
@@ -63,12 +62,7 @@ public class Main_Menu_Activity extends AppCompatActivity {
             }
         });
 
-        nearby.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToNearbyLocations();
-            }
-        });
+
     }
 
     //method to switch to the Profile page

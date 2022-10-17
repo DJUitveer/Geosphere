@@ -12,10 +12,11 @@
     <color name="pearl">#F8F0E3</color>
     <color name="translucent">#41F4F4F4</color>
 
-    <color name="mapboxWhite">#ffffff</color>
-    <color name="mapboxBlue">#4264fb</color>
-    <color name="mapboxGrayLight">#c6d2e1</color>
-    <color name="mapboxPink">#ee4e8b</color>
-    <color name="mapboxYellow">#d9d838</color>
-    <color name="mapboxRed">#b43b71</color>
+    <color name="geosphere_blue_dark">#0C0E3A</color>
+    <color name="geosphere_blue_light">#E8FFFF</color>
+    <color name="translucent_blue">#3B3F59A8</color>
+    <color name="text_hint_gray_dark">#6082B6</color>
+    <color name="text_hint_gray_light">#3C4553</color>
+    <color name="translucent_med">#99FFFFFF</color>
+
 </resources>
