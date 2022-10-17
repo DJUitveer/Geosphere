@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!--    Todo: Reference images (wallpaper flare)-->
+
     <!-- Base application theme. -->
     <style name="Theme.GeoSphere" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -22,7 +22,8 @@
         <item name="android:textColor" >@color/geosphere_blue_dark</item>
 
     </style>
-
+    <!--    Todo: Reference images (wallpaper flare)-->
+//https://c4.wallpaperflare.com/wallpaper/24/23/796/portrait-display-vertical-pattern-digital-art-wallpaper-preview.jpg
     <style name="TextAppearance.App.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textColor">@color/geosphere_blue_light</item>
         <item name="android:background">@color/geosphere_blue_dark</item>

@@ -16,5 +16,7 @@
         <item name="android:fontFamily">@font/montserrat_bold</item>
         <item name="android:textColor" >@color/geosphere_blue_light</item>
         <item name="android:textColorHint">@color/translucent_med</item>
+
+        //https://www.wallpaperflare.com/two-blue-crystals-blue-and-purple-constellation-poster-plexus-wallpaper-ub
     </style>
 </resources>

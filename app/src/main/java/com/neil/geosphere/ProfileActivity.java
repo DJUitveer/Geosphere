@@ -33,13 +33,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void EditProfile() {
-        //Todo: Edit profile (neil & creolin)
-    }
-
-    public void DeleteProfile() {
-        //Todo: Delete profile (neil & creolin)
-    }
 
     //Method to Sign out the user
     public void LogOut() {

@@ -53,7 +53,9 @@ public class LoginActivity extends AppCompatActivity {
                 String userPassword = password.getText().toString();
                 //register method
                 signUp(userEmail, userPassword);
-                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
+                Intent switchToSignUp = new Intent(LoginActivity.this, RegistrationActivity.class);
+                switchToSignUp.putExtra("LoginEmail", userEmail);
+                startActivity(switchToSignUp);
             }
         });
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     //method to login using normal email and google
     public void signUp(String email, String password) {

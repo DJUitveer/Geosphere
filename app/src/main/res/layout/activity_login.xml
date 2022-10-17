@@ -7,40 +7,67 @@
     tools:context=".LoginActivity">
 
 
-    <EditText
-        android:id="@+id/etPassword"
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="293dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_password"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:placeholderTextColor="@color/translucent_med"
+        app:placeholderText="Email@gmail.com"
+        app:boxBackgroundColor="@color/translucent"
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidth="5dp"
+        android:backgroundTint="@color/translucent"
+        app:boxCornerRadiusBottomEnd="30dp"
+        app:boxCornerRadiusBottomStart="30dp"
+        app:boxCornerRadiusTopEnd="30dp"
+        app:boxCornerRadiusTopStart="30dp"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txv_geosphere_login">
 
-    <EditText
-        android:id="@+id/etEmail"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="293dp"
+            android:layout_height="62dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="293dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_email"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:placeholderTextColor="@color/translucent_med"
+        app:placeholderText="Password123#"
+        app:boxBackgroundColor="@color/translucent"
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidth="5dp"
+        android:backgroundTint="@color/translucent"
+        app:boxCornerRadiusBottomEnd="30dp"
+        app:boxCornerRadiusBottomStart="30dp"
+        app:boxCornerRadiusTopEnd="30dp"
+        app:boxCornerRadiusTopStart="30dp"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="293dp"
+            android:layout_height="62dp"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignIn"
         android:layout_width="150dp"
@@ -55,17 +82,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword"
         app:layout_constraintVertical_bias="0.625"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 
     <ImageView
         android:id="@+id/ivLoginIcon"
-        android:layout_width="177dp"
-        android:layout_height="140dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="56dp"
         android:clickable="true"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -101,18 +129,18 @@
         app:layout_constraintVertical_bias="0.18" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txv_geosphere_login"
         android:layout_width="247dp"
         android:layout_height="49dp"
         android:layout_marginTop="56dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:shadowColor="#000000"
+        android:shadowColor="@color/geosphere_blue_light"
         android:shadowDx="5"
         android:shadowDy="4"
         android:shadowRadius="5"
         android:text="Geo Sphere"
-        android:textColor="#FFFFFF"
+        android:clickable="true"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

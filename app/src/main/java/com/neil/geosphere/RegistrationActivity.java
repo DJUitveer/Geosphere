@@ -29,16 +29,17 @@ import com.neil.geosphere.Objects.Settings;
 import com.neil.geosphere.Objects.User;
 
 public class RegistrationActivity extends AppCompatActivity {
-    static final int PICK_IMAGE_REQUEST = 1;
+
     //Declare of UI variables
-    TextView edtemail;
-    EditText edtname, edtsurname, edtusername, spAge;
-    Spinner Landmark;
-    RadioButton rbnMetric ,rbnImperial;
-    Button register;
+    private TextView edtemail;
+    private EditText edtname, edtsurname, edtusername, spAge;
+    private Spinner Landmark;
+    private RadioButton rbnMetric ,rbnImperial;
+    private Button register;
+    private FirebaseAuth fAuth;
 
     //Declare of picture properties
-    CheckBox chbxPermission;
+    private CheckBox chbxPermission;
     private DatabaseReference mDatabaseRef;
     private FirebaseFirestore fStore;
 
@@ -53,10 +54,17 @@ public class RegistrationActivity extends AppCompatActivity {
         edtusername = findViewById(R.id.txv_username_input);
         chbxPermission = findViewById(R.id.chbxPermission);
         Landmark = findViewById(R.id.spn_profile_Landmark_type);
+        register = findViewById(R.id.btn_register_save);
         rbnImperial = findViewById(R.id.rb_profile_imperial);
         rbnMetric = findViewById(R.id.rb_profile_Metric);
 
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        Bundle bundle = getIntent().getExtras();
+        String getEmail = bundle.getString("LoginEmail");
+        edtemail.setText(getEmail);
 
          register.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -80,19 +88,11 @@ public class RegistrationActivity extends AppCompatActivity {
                  }
              }
          });
-
-
-
-
     }
 
     public void Register()
     {
-        Bundle bundle = getIntent().getExtras();
-        String getEmail = bundle.getString("LoginEmail");
-        edtemail.setText(getEmail);
-
-        String name , surname ,username , email , landmarktype;
+        String name , surname ,username , email ;
 
         name = edtname.getText().toString();
         surname = edtsurname.getText().toString();
@@ -119,6 +119,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     }
+//TODO: fix Registration
 
     public void SaveUserSettings(String uid, String landmarkType, String unitOfMeasurement) {
 
