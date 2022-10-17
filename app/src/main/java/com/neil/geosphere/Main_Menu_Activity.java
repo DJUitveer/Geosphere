@@ -90,11 +90,6 @@ public class Main_Menu_Activity extends AppCompatActivity {
         startActivity(ToMap);
     }
 
-    //method to switch to the Nearby locations page
-    public void ToNearbyLocations() {
-        Intent ToNearbyLocations = new Intent(Main_Menu_Activity.this, MapsActivity.class);
-        startActivity(ToNearbyLocations);
-    }
 
     private void getUserFilteredLocations() {
         String uid = fAuth.getCurrentUser().getUid();

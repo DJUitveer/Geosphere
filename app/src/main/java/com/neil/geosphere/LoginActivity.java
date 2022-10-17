@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -71,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     //method to login using normal email and google
     public void signUp(String email, String password) {
         //Method to prevent users entering blank data
@@ -87,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "SignUp Successful. LogIn Successful", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 CurrentUser.UID = user.getUid();
-
+                                CurrentUser.userEmail = email;
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(LoginActivity.this, "createUserWithEmail:failure", Toast.LENGTH_SHORT).show();
@@ -118,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                             CurrentUser.UID = user.getUid();
+                                            CurrentUser.userEmail = email;
                                             Toast.makeText(LoginActivity.this, "User Logged in ", Toast.LENGTH_LONG);
                                         }
                                     }

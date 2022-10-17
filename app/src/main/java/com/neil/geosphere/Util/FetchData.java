@@ -64,7 +64,6 @@ public class FetchData {
                                 markerOptions.position(latLng);
                                 markerOptions.snippet(placeID);
                                 googleMap.addMarker(markerOptions);
-
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -76,7 +75,7 @@ public class FetchData {
 
     }
 
-    //todo:get routes coords and make polyline appear on maps fragment
+    //todo:get routes coords and make polyline appear on maps fragment (for final POE #INCOMPLETE)
     //https://developers.google.com/maps/documentation/android-sdk/polygon-tutorial
     //https://developers.google.com/maps/documentation/navigation/android-sdk/v2/route#add_a_navigation_fragment
     public void GetDirections(LatLng... latLngParamaters) {

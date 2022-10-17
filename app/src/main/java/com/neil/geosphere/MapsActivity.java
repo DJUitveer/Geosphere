@@ -31,10 +31,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.neil.geosphere.Objects.CurrentUser;
+import com.neil.geosphere.Objects.FavouriteLocation;
 import com.neil.geosphere.Util.FetchData;
 import com.neil.geosphere.databinding.ActivityMapsBinding;
 
@@ -56,9 +59,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location lastKnownLocation;
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
-    private StringBuilder stringBuilder = new StringBuilder
-            ("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+    private StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
     private SearchView searchView;
+    private String toFavouritePlaceID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             fStore = FirebaseFirestore.getInstance();
             searchView = findViewById(R.id.sv_Find_Places);
             // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.map);
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -119,8 +121,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
                 String markerName = marker.getTitle();
-                String snippet = marker.getSnippet();
-                AlertDialogForMarkerClick(markerName, snippet);
+                LatLng favouriteLocation = marker.getPosition();
+                AlertDialogForMarkerClick(markerName, favouriteLocation);
                 return false;
             }
         });
@@ -128,20 +130,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }//https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
 
     //method to display an alert dialog when a marker is selected
-    private void AlertDialogForMarkerClick(String markerName, String snippet) {
+    private void AlertDialogForMarkerClick(String markerName, LatLng favourite) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
         builder.setTitle("Navigate");
-        builder.setMessage("Do you want to navigate to " + markerName);
+        builder.setMessage("Do you want to add " + markerName + " to Favourites?");
         builder.setCancelable(false);
         builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (Dialog, which) -> {
-            Toast.makeText(MapsActivity.this, "Clicked on " + markerName + " with response YES", Toast.LENGTH_SHORT).show();
-            Toast.makeText(MapsActivity.this, "snippet= " + snippet, Toast.LENGTH_SHORT).show();
+            //adds favourite to database
+            saveFavourite(markerName, favourite);
         });
         builder.setNegativeButton("No", (DialogInterface.OnClickListener) (Dialog, which) -> {
-            Toast.makeText(MapsActivity.this, "Clicked on " + markerName + " with response NO", Toast.LENGTH_SHORT).show();
+
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private void saveFavourite(String markerName, LatLng favourite) {
+        String userID = fAuth.getCurrentUser().getUid();
+        FavouriteLocation newFavourite = new FavouriteLocation(markerName, favourite, userID);
+        DocumentReference reference = fStore.collection("FavouriteLocations").document();
+        reference.set(newFavourite).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(MapsActivity.this, "Location Added to Favourites", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MapsActivity.this, "Error! Could not save location to Favourites", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getFilteredLocations() {
@@ -165,8 +184,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         locationPermissionGranted = false;
         if (requestCode == PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
-            if (grantResults.length > 0 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 locationPermissionGranted = true;
             }
         } else {
@@ -203,16 +221,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             // Set the map's camera position to the current location of the device.
                             lastKnownLocation = task.getResult();
                             if (lastKnownLocation != null) {
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                        new LatLng(lastKnownLocation.getLatitude(),
-                                                lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                                 getFilteredLocations();
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
-                            mMap.moveCamera(CameraUpdateFactory
-                                    .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
                     }
