@@ -11,11 +11,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
     //Declaring Components
-    private Button  logOut, menu;
+    private Button logOut, menu;
 
     private FirebaseAuth mAuth;
 
@@ -26,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         //Initializing Components
         logOut = findViewById(R.id.btnLogout);
-menu =findViewById(R.id.btn_menu_profile);
+        menu = findViewById(R.id.btn_menu_profile);
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +74,6 @@ menu =findViewById(R.id.btn_menu_profile);
             }
         });
     }
-
 
 
     //Method to Sign out the user

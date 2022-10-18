@@ -67,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txv_cv_Description" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_settings_save"
+            android:id="@+id/btn_start_tracking"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/geosphere_blue_dark"
