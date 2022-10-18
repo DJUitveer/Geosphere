@@ -222,6 +222,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             lastKnownLocation = task.getResult();
                             if (lastKnownLocation != null) {
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                CurrentUser.deviceLocationForRoute = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
                                 getFilteredLocations();
                             }
                         } else {
