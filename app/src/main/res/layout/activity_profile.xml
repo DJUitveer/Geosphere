@@ -5,58 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
-    <!--Todo: fix UI and do registration(history and achievement to be removed)-->
-<!--    <Button-->
-<!--        android:id="@+id/btnDeleteProfile"-->
-<!--        android:layout_width="171dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:background="@drawable/custom_input"-->
-<!--        android:fontFamily="@font/montserrat_bold"-->
-<!--        android:text="Delete Profile"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/btnAchievements"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />-->
 
-<!--    <Button-->
-<!--        android:id="@+id/btnAchievements"-->
-<!--        android:layout_width="171dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:background="@drawable/custom_input"-->
-<!--        android:fontFamily="@font/montserrat_bold"-->
-<!--        android:text="Achievemet"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/btnHistory"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/btnDeleteProfile" />-->
-
-
-
-<!--    <Button-->
-<!--        android:id="@+id/btnEdit"-->
-<!--        android:layout_width="171dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginTop="56dp"-->
-<!--        android:background="@drawable/custom_input"-->
-<!--        android:fontFamily="@font/montserrat_bold"-->
-<!--        android:text="Edit Profile"-->
-<!--        android:textColor="@color/white"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tvProfile" />-->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tb_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E8FFFF"
+        android:background="@color/geosphere_blue_light"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/clickBtn"
+            android:id="@+id/btn_menu_profile"
             android:layout_width="60dp"
             android:layout_height="70dp"
             android:backgroundTint="@color/geosphere_blue_light"
@@ -66,24 +26,25 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/Name"
+            android:id="@+id/btn_name_profile"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
+            android:clickable="false"
             android:backgroundTint="@color/geosphere_blue_light"
             android:text="GeoSphere"
             android:textColor="@color/geosphere_blue_dark"
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/btn_details"
+        <ImageView
+            android:id="@+id/btn_icon_profile"
             android:layout_width="70sp"
             android:layout_height="70dp"
+            android:background="@color/translucent"
             android:layout_gravity="end"
             android:scaleType="fitXY"
-            android:src="@drawable/icon"
-            android:textSize="20dp" />
+            android:src="@drawable/icon"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -99,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_profile" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"

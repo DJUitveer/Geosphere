@@ -47,8 +47,8 @@ public class BookMarkedLocationsAdapter extends RecyclerView.Adapter<BookMarkedL
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.txv_cv_Title);
-            coords = itemView.findViewById(R.id.txv_cv_Coords);
+//            title = itemView.findViewById(R.id.txv_cv_Title);
+//            coords = itemView.findViewById(R.id.txv_cv_Coords);
         }
     }
 }

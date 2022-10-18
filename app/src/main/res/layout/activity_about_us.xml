@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AboutUsActivity">
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/geosphere_blue_light"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btn_menu_about_us"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/geosphere_blue_light"
+            android:text="..."
+            android:textColor="@color/geosphere_blue_dark"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_name_about_us"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:backgroundTint="@color/geosphere_blue_light"
+            android:text="GeoSphere"
+            android:textColor="@color/geosphere_blue_dark"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btn_icon_about_us"
+            android:layout_width="70sp"
+            android:layout_height="70dp"
+            android:background="@color/translucent"
+            android:layout_gravity="end"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/translucent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txv_about_disp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="About us "
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txv_about_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:text="@string/about_us"/>
+
+                <TextView
+                    android:id="@+id/txv_about_team_disp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About the team "
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/txv_team_creolin_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Creolin Gopal\n(Project Manager)"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_creolin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/creolin_about_him"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_neil_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Neil Prins\n(Head of Software Development)"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_neil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/neil_about_him"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+
+                <TextView
+                    android:id="@+id/txv_team_kate_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Katelyn Munilall\n (Head of project deployment)"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_kate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/katelyn_about_her"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_mojo_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Muhammad Asmal\n(Head of Research and Development)"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_mojo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mojo_about_him"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_nikshay_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nikshay Amika Lalla\n(Quality Assurance Specialist)"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/txv_team_nikshay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nikshay_about_him"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+
+
+
+
+        </ScrollView>
+
+
+    </LinearLayout>

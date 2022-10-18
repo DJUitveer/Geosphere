@@ -7,42 +7,42 @@
     tools:context=".Main_Menu_Activity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tb_main_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="?attr/actionBarTheme"
         android:background="@color/geosphere_blue_light"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/clickBtn"
+            android:id="@+id/btn_menu_main_menu"
             android:layout_width="60dp"
             android:layout_height="70dp"
+            android:backgroundTint="@color/geosphere_blue_light"
             android:text="..."
             android:textColor="@color/geosphere_blue_dark"
             android:textSize="20dp"
-            android:backgroundTint="@color/geosphere_blue_light"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/Name"
+            android:id="@+id/btn_name_main_menu"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
+            android:clickable="false"
+            android:backgroundTint="@color/geosphere_blue_light"
             android:text="GeoSphere"
-            android:textStyle="bold"
             android:textColor="@color/geosphere_blue_dark"
             android:textSize="25dp"
-            android:backgroundTint="@color/geosphere_blue_light"/>
+            android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/btn_details"
+        <ImageView
+            android:id="@+id/btn_icon_main_menu"
             android:layout_width="70sp"
             android:layout_height="70dp"
+            android:background="@color/translucent"
             android:layout_gravity="end"
-            android:backgroundTint="@color/translucent"
-            android:textSize="20dp"
             android:scaleType="fitXY"
             android:src="@drawable/icon"/>
 
@@ -55,7 +55,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/tb_main_menu">
 
         <LinearLayout
             android:id="@+id/lin_main_menu"

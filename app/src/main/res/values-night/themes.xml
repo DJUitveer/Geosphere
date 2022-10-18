@@ -19,4 +19,9 @@
 
         //https://www.wallpaperflare.com/two-blue-crystals-blue-and-purple-constellation-poster-plexus-wallpaper-ub
     </style>
+
+    <style name="CardView.">
+        <item name="cardBackgroundColor">@color/translucent_med</item>
+        <item name="android:textColor">@color/cardview_dark_background</item>
+    </style>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
     tools:context=".BookmarkedLocationsActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tb_bookmarks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/geosphere_blue_light"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/clickBtn"
+            android:id="@+id/btn_menu_bookmarks"
             android:layout_width="60dp"
             android:layout_height="70dp"
             android:backgroundTint="@color/geosphere_blue_light"
@@ -26,35 +26,52 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/Name"
+            android:id="@+id/btn_name_bookmarks"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
+            android:clickable="false"
             android:backgroundTint="@color/geosphere_blue_light"
             android:text="GeoSphere"
             android:textColor="@color/geosphere_blue_dark"
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/btn_details"
+        <ImageView
+            android:id="@+id/btn_icon_bookmarks"
             android:layout_width="70sp"
             android:layout_height="70dp"
+            android:background="@color/translucent"
             android:layout_gravity="end"
-            android:backgroundTint="@color/translucent"
             android:scaleType="fitXY"
-            android:src="@drawable/icon"
-            android:textSize="20dp" />
+            android:src="@drawable/icon"/>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_Favourite_Bookmarks"
-        android:layout_width="409dp"
-        android:layout_height="659dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tb_bookmarks"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_Favourite_Bookmarks"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

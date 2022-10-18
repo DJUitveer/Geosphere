@@ -6,6 +6,13 @@
     <string name="default_info_snippet">No places found, because location permission is disabled.</string>
     <string name="option_get_place">Get place</string>
     <string name="pick_place">Choose a place</string>
+    <string name="about_us">Geosphere is a team of five, we all collaborated like a well - oiled machine all our opinions were well taken, and we learnt from each other.\n\nWe researched numerous applications and found features that suited our requirements; we then planned and designed our dream application ‘Geosphere’ .Overall the team has produced stellar results in the production of the application</string>
+    <string name="nikshay_about_him">Nikshay is hard working backbone of the team, specializing in people skills, research and documentation. He is good at logical thinking and is good at programming. \nNikshay can be found on:\n\nEmail: nikshaylalla8000@gmail.com\nCell: +27 61 483 7096</string>
+    <string name="neil_about_him">Neil is a hard - working member of the team, who is meticulous he is specializing in back - end development. He is practical, thinker and is a fast learner. \nNeil can be found on:\n\nEmail: neilprins2000@gmail.com\nCell: +27 79 520 6666</string>
+    <string name="mojo_about_him">Muhammad is a logical and technical - working member of the team, specializing in back - end and front-end development. He is a very creative individual with great artistic taste.\nMuhammed can be found on:\n\nEmail: muhammadasmal7890@gmail.com\nCell: +27 84 555 6300</string>
+    <string name="katelyn_about_her">Katelyn, is a crucial member of the team accounting for quality assurance and debug testing.Her attention to detail and conscientious approach in her role has made her an asset to the team. \nKatelyn can be contacted on:\n\nEmail: ST20117142@vcconnect.co.za\nCell: +27 74 926 6392</string>
+    <string name="creolin_about_him">Creolin is a hard - working member of the team, specializing in back - end and front end development. He is a practical, logical thinker.\nCreolin can be found on:\n\nEmail: creolingopal5@gmail.com\nCell: +27 82 963 7895</string>
+    <string name="faqs">Q: Why is the app so blue?\nA: The developer found that this color is aesthetically appealing and a close resemblance to freedom.\n\nQ: Why can I not add custom location specifics to the app? \nA:The description of the location can contain the information you may want to store\n\nQ: Are the locations I have access to limited e.g. Can I only add locations for driving to and from rather than walking? \nA:No,You could add numerous location bookmarks for multiple modes of transport\n\</string>
     <string-array name="landmarkFilterArray">
         <item>Historical</item>
         <item>Modern</item>
@@ -13,4 +20,5 @@
         <item>Popular</item>
         <item>Nature</item>
     </string-array>
+
 </resources>

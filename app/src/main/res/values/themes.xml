@@ -28,4 +28,9 @@
         <item name="android:textColor">@color/geosphere_blue_light</item>
         <item name="android:background">@color/geosphere_blue_dark</item>
     </style>
+
+    <style name="CardView.">
+        <item name="cardBackgroundColor">@color/translucent_med</item>
+        <item name="android:textColor">@color/cardview_dark_background</item>
+    </style>
 </resources>

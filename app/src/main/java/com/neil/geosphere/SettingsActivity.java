@@ -1,9 +1,12 @@
 package com.neil.geosphere;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,7 +27,7 @@ import com.neil.geosphere.Objects.Settings;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //Declaring components
-    private Button save, help, aboutUs;
+    private Button save, help, aboutUs , menu ;
     private Spinner typeOfLandMark;
     private RadioButton metric, imperial;
     private FirebaseFirestore fStore;
@@ -42,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         typeOfLandMark = findViewById(R.id.spn_settings_Landmark_type);
         metric = findViewById(R.id.rb_settings_Metric);
         imperial = findViewById(R.id.rb_settings_imperial);
+        menu = findViewById(R.id.btn_menu_settings);
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -65,6 +69,47 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                     Toast.makeText(SettingsActivity.this, "Please make sure to provide settings.", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        //Method to open and interact with menu
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(SettingsActivity.this, menu);
+                popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    //Switch statement to decide what users chooses
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.bookmarks:
+                                Intent ToBookmark = new Intent(SettingsActivity.this, BookmarkedLocationsActivity.class);
+                                startActivity(ToBookmark);
+                                break;
+                            case R.id.settings:
+                                Toast.makeText(SettingsActivity.this, "Already on this page ", Toast.LENGTH_LONG).show();
+//                                Intent toSettings = new Intent(SettingsActivity.this, SettingsActivity.class);
+//                                startActivity(toSettings);
+                                break;
+                            case R.id.my_profile:
+                                Intent ToMyProfile=new Intent(SettingsActivity.this, ProfileActivity.class);
+                                startActivity(ToMyProfile);
+                                break;
+                            case R.id.about_us:
+                                Intent ToAboutUs = new Intent(SettingsActivity.this, AboutUsActivity.class);
+                                startActivity(ToAboutUs);
+                                break;
+                            case R.id.help:
+
+                                Intent ToHelp = new Intent(SettingsActivity.this, HelpActivity.class);
+                                startActivity(ToHelp);
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
             }
         });
     }

@@ -7,40 +7,41 @@
     tools:context=".SettingsActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tb_Settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E8FFFF"
+        android:background="@color/geosphere_blue_light"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/clickBtn"
+            android:id="@+id/btn_menu_settings"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:backgroundTint="#E8FFFF"
+            android:backgroundTint="@color/geosphere_blue_light"
             android:text="..."
-            android:textColor="#0C0E3A"
+            android:textColor="@color/geosphere_blue_dark"
             android:textSize="20dp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/Name"
+            android:id="@+id/btn_name_settings"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
+            android:clickable="false"
             android:backgroundTint="@color/geosphere_blue_light"
             android:text="GeoSphere"
             android:textColor="@color/geosphere_blue_dark"
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/btn_details"
+        <ImageView
+            android:id="@+id/btn_icon_details"
             android:layout_width="70sp"
-            android:background="@color/translucent"
             android:layout_height="70dp"
+            android:background="@color/translucent"
             android:layout_gravity="end"
             android:scaleType="fitXY"
             android:src="@drawable/icon"/>
@@ -55,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/tb_Settings"
         app:layout_constraintVertical_bias="0.021"
         app:srcCompat="@drawable/settings" />
 
