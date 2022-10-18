@@ -86,4 +86,9 @@ FirebaseAuth mAuth;
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

@@ -82,4 +82,9 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
         Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }

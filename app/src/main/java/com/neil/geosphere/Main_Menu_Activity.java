@@ -139,6 +139,10 @@ public class Main_Menu_Activity extends AppCompatActivity {
         startActivity(ToMap);
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 
     private void getUserFilteredLocations() {
         String uid = fAuth.getCurrentUser().getUid();

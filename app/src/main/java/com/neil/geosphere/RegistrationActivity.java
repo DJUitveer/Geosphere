@@ -118,7 +118,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     }
-//TODO: fix Registration
+
 
     public void SaveUserSettings(String uid, String landmarkType, String unitOfMeasurement) {
 
@@ -156,4 +156,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }
