@@ -70,63 +70,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (savedInstanceState != null) {
             return;
         } else {
-            binding = ActivityMapsBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getApplicationContext());
-            fAuth = FirebaseAuth.getInstance();
-            fStore = FirebaseFirestore.getInstance();
-            searchView = findViewById(R.id.sv_Find_Places);
-            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    String location = searchView.getQuery().toString();
-                    List<Address> addressList = null;
-                    if (location != null || location.equals("")) {
-                        Geocoder geocoder = new Geocoder(MapsActivity.this);
-                        try {
-                            addressList = geocoder.getFromLocationName(location, 1);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        Address address = addressList.get(0);
-                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        String placeID = address.getAddressLine(0);
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(location).snippet(placeID));
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                    }
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    return false;
-                }
-            });
-
-            mapFragment.getMapAsync(this);
         }
+        binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.getApplicationContext());
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        searchView = findViewById(R.id.sv_Find_Places);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String location = searchView.getQuery().toString();
+                List<Address> addressList = null;
+                if (location != null || location.equals("")) {
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Address address = addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    String placeID = address.getAddressLine(0);
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(location).snippet(placeID));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        mapFragment.getMapAsync(this);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        if (mMap != null) {
+            getLocationPermission();
+            updateLocationUI();
+            getDeviceLocation();
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    String markerName = marker.getTitle();
+                    LatLng favouriteLocation = marker.getPosition();
+                    AlertDialogForMarkerClick(markerName, favouriteLocation);
+                    return false;
+                }
+            });
+        } else {
+            return;
+        }
 
-        getLocationPermission();
-        updateLocationUI();
-        getDeviceLocation();
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                String markerName = marker.getTitle();
-                LatLng favouriteLocation = marker.getPosition();
-                AlertDialogForMarkerClick(markerName, favouriteLocation);
-                return false;
-            }
-        });
 //https://maps.googleapis.com/maps/api/directions/json?origin=31.037042,-29.771891&destination=31.0356,-29.7968&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
     }//https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
 
@@ -149,8 +153,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void saveFavourite(String markerName, LatLng favourite) {
         String userID = fAuth.getCurrentUser().getUid();
-        String latitude= String.valueOf(favourite.latitude);
-        String longitude= String.valueOf(favourite.longitude);
+        String latitude = String.valueOf(favourite.latitude);
+        String longitude = String.valueOf(favourite.longitude);
         FavouriteLocation newFavourite = new FavouriteLocation(markerName, latitude, longitude, userID);
         DocumentReference reference = fStore.collection("FavouriteLocations").document();
         reference.set(newFavourite).addOnCompleteListener(new OnCompleteListener<Void>() {

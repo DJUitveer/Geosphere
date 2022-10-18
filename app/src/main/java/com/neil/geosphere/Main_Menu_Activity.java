@@ -22,7 +22,7 @@ import com.neil.geosphere.Objects.Settings;
 
 public class Main_Menu_Activity extends AppCompatActivity {
     //Declaring components
-    private CardView settings, profile, map, bookmark ;
+    private CardView settings, profile, map, bookmark;
     private Button menu;
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
@@ -87,7 +87,7 @@ public class Main_Menu_Activity extends AppCompatActivity {
                                 startActivity(toSettings);
                                 break;
                             case R.id.my_profile:
-                                Intent ToMyProfile=new Intent(Main_Menu_Activity.this, ProfileActivity.class);
+                                Intent ToMyProfile = new Intent(Main_Menu_Activity.this, ProfileActivity.class);
                                 startActivity(ToMyProfile);
                                 break;
                             case R.id.about_us:
@@ -148,8 +148,14 @@ public class Main_Menu_Activity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     Settings getSettings = document.toObject(Settings.class);
-                    String landmarkType = getSettings.getLandmarkType();
-                    CurrentUser.userFilterSetting = landmarkType;
+                    if (getSettings != null) {
+                        String landmarkType = getSettings.getLandmarkType();
+                        CurrentUser.userFilterSetting = landmarkType;
+                    } else {
+                        Toast.makeText(Main_Menu_Activity.this, "Warning Settings could not be retrieved.", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
             }
         });
