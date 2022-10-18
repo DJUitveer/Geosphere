@@ -214,7 +214,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="I allow my infomration to be saved and used" />
+                android:text="I allow my infomration to be saved and used"
+                android:textColorHighlight="@color/white"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_register_save"

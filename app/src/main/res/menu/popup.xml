@@ -27,4 +27,9 @@
         android:id="@+id/about_us"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="About Us" />
+
+    <item
+        android:id="@+id/home"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Main Menu"/>
 </menu>

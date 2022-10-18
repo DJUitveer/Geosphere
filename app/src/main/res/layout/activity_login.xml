@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-
-
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edtEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -68,22 +65,21 @@
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSignIn"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginTop="44dp"
         android:backgroundTint="@color/translucent"
         android:fontFamily="@font/montserrat_bold"
         android:text="Login"
         android:textColor="@color/geosphere_blue_dark"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPassword"
-        app:layout_constraintVertical_bias="0.625"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 
@@ -91,10 +87,11 @@
         android:id="@+id/ivLoginIcon"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="32dp"
         android:clickable="true"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon" />
@@ -121,12 +118,10 @@
         android:text="Not registered as yet"
         android:textColor="@color/geosphere_blue_light"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
 
     <TextView
         android:id="@+id/txv_geosphere_login"

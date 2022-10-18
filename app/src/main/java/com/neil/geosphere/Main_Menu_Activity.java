@@ -2,7 +2,11 @@ package com.neil.geosphere;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +22,8 @@ import com.neil.geosphere.Objects.Settings;
 
 public class Main_Menu_Activity extends AppCompatActivity {
     //Declaring components
-    private CardView settings, profile, map, bookmark;
+    private CardView settings, profile, map, bookmark ;
+    private Button menu;
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
 
@@ -31,6 +36,7 @@ public class Main_Menu_Activity extends AppCompatActivity {
         bookmark = findViewById(R.id.crv_main_menu_open_bookmarked);
         settings = findViewById(R.id.crv_main_menu_settings);
         profile = findViewById(R.id.crv_main_menu_profile);
+        menu = findViewById(R.id.btn_menu_main_menu);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         getUserFilteredLocations();
@@ -61,7 +67,50 @@ public class Main_Menu_Activity extends AppCompatActivity {
                 ToBookmarks();
             }
         });
+        //Method to open and interact with menu
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(Main_Menu_Activity.this, menu);
+                popupMenu.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    //Switch statement to decide what users chooses
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.bookmarks:
+                                Intent ToBookmark = new Intent(Main_Menu_Activity.this, BookmarkedLocationsActivity.class);
+                                startActivity(ToBookmark);
+                                break;
+                            case R.id.settings:
+                                Intent toSettings = new Intent(Main_Menu_Activity.this, SettingsActivity.class);
+                                startActivity(toSettings);
+                                break;
+                            case R.id.my_profile:
+                                Intent ToMyProfile=new Intent(Main_Menu_Activity.this, ProfileActivity.class);
+                                startActivity(ToMyProfile);
+                                break;
+                            case R.id.about_us:
+                                Intent ToAboutUs = new Intent(Main_Menu_Activity.this, AboutUsActivity.class);
+                                startActivity(ToAboutUs);
+                                break;
+                            case R.id.help:
 
+                                Intent ToHelp = new Intent(Main_Menu_Activity.this, HelpActivity.class);
+                                startActivity(ToHelp);
+                                break;
+                            case R.id.home:
+                                Toast.makeText(Main_Menu_Activity.this, "Page Already active ", Toast.LENGTH_LONG).show();
+//                                Intent ToHome = new Intent(Main_Menu_Activity.this, HelpActivity.class);
+//                                startActivity(ToHome);
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
     }
 

@@ -38,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
         //Initializing Components
         save = findViewById(R.id.btn_settings_save);
         help = findViewById(R.id.btn_settings_help);
@@ -105,11 +106,29 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                                 Intent ToHelp = new Intent(SettingsActivity.this, HelpActivity.class);
                                 startActivity(ToHelp);
                                 break;
+                            case R.id.home:
+                                Intent ToHome = new Intent(SettingsActivity.this, Main_Menu_Activity.class);
+                                startActivity(ToHome);
+                                break;
                         }
                         return true;
                     }
                 });
                 popupMenu.show();
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Help();
+            }
+        });
+
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AboutUs();
             }
         });
     }
@@ -164,17 +183,25 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void Help() {
-        //Todo: Help method (neil & creolin)
+        Intent ToHelp = new Intent(SettingsActivity.this, HelpActivity.class);
+        startActivity(ToHelp);
     }
 
     public void AboutUs() {
-        //Todo: Display About the devs information (neil & creolin)
+        Intent ToAboutUs = new Intent(SettingsActivity.this, AboutUsActivity.class);
+        startActivity(ToAboutUs);
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner landmarkFilter = (Spinner) findViewById(R.id.spn_settings_Landmark_type);
         landmarkFilter.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        return;
     }
 
     @Override
