@@ -51,10 +51,18 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = email.getText().toString();
                 String userPassword = password.getText().toString();
                 //register method
-                signUp(userEmail, userPassword);
-                Intent switchToSignUp = new Intent(LoginActivity.this, RegistrationActivity.class);
-                switchToSignUp.putExtra("LoginEmail", userEmail);
-                startActivity(switchToSignUp);
+                if ( !userEmail.equals(null) && !userEmail.equals("") && !userPassword.equals(null) && !userPassword.equals(""))
+                {
+                    signUp(userEmail, userPassword);
+                    Intent switchToSignUp = new Intent(LoginActivity.this, RegistrationActivity.class);
+                    switchToSignUp.putExtra("LoginEmail", userEmail);
+                    startActivity(switchToSignUp);
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Please provide Sign Up details to continue", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +72,15 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = email.getText().toString();
                 String userPassword = password.getText().toString();
                 //login method
-                login(userEmail, userPassword);
+
+                if ( !userEmail.equals(null) && !userEmail.equals("") && !userPassword.equals(null) && !userPassword.equals(""))
+                {
+                    login(userEmail, userPassword);
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Please provide Login details to continue", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

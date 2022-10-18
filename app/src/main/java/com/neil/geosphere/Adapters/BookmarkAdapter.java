@@ -10,18 +10,66 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.maps.model.LatLng;
 import com.mapbox.geojson.Point;
 import com.neil.geosphere.Objects.CurrentUser;
 import com.neil.geosphere.Objects.FavouriteLocation;
 import com.neil.geosphere.R;
-import com.neil.geosphere.Util.Navigation;
+import com.neil.geosphere.Util.Routing_Nav;
 
-public class BookmarkAdapter  {
+import java.util.ArrayList;
 
+public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHolder> {
+    private final Context context;
+    private final ArrayList<FavouriteLocation> favouriteLocationArrayList;
 
+    public BookmarkAdapter(Context context, ArrayList<FavouriteLocation> favouriteLocationArrayList) {
+        this.context = context;
+        this.favouriteLocationArrayList = favouriteLocationArrayList;
+    }
+
+    @NonNull
+    @Override
+    public BookmarkAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bookmarked_locations_cardview, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BookmarkAdapter.ViewHolder holder, int position) {
+        FavouriteLocation model = favouriteLocationArrayList.get(position);
+        holder.title.setText(model.getTitle());
+        holder.coords.setText("Lat: " + model.getLatitude() + "\nLong: " + model.getLatitude());
+        holder.destination = Point.fromLngLat(Double.parseDouble(model.getLatitude()),Double.parseDouble(model.getLongitude()));
+        holder.start = CurrentUser.deviceLocationForRoute;
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return favouriteLocationArrayList.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView title, coords;
+        private Button startTracking;
+        private Point destination, start;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.txv_cv_Title);
+            coords = itemView.findViewById(R.id.txv_cv_coords);
+            //startTracking = itemView.findViewById(R.id.btn_start_trackin);
+
+//            startTracking.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                    Routing_Nav n = new Routing_Nav();
+//                    n.getRoute(start,destination,view.getContext());
+//                }
+//            });
+
+        }
+    }
 }
 //
 //    Context context;
@@ -48,7 +96,7 @@ public class BookmarkAdapter  {
 //        private TextView title, coords;
 //        private Button startNavigation;
 //        private LatLng cardPosition;
-//        private Navigation nav = new Navigation();
+//        private Routing_Nav nav = new Routing_Nav();
 //
 //        public ViewHolder(@NonNull View itemView) {
 //            super(itemView);

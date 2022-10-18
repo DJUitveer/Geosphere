@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Navigation {
+public class Routing_Nav {
     private MapboxMap map;
     private MapView mapView;
     private NavigationMapRoute navigationMapRoute;
@@ -43,10 +43,10 @@ public class Navigation {
                         public void onResponse(@NonNull Call<DirectionsResponse> call, @NonNull Response<DirectionsResponse> response) {
 
                             if (response.body() == null) {
-                                Toast.makeText(context, "No routes found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "No routes found 1", Toast.LENGTH_SHORT).show();
                                 return;
                             } else {
-                                if (response.body().routes().size() < 1) {
+                                if (response.body().routes().size() < 0) {
                                     Toast.makeText(context, "No routes found", Toast.LENGTH_SHORT).show();
 
                                     return;

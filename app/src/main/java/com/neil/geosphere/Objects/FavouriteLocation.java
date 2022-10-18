@@ -10,7 +10,7 @@ public class FavouriteLocation {
     private String userID;
 
     public FavouriteLocation(String title, String latitude, String longitude, String userID) {
-        Title = title;
+        this.Title = title;
         this.latitude = latitude;
         this.longitude = longitude;
         this.userID = userID;
