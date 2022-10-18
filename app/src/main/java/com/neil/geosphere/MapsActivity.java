@@ -175,7 +175,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         stringBuilder.append("&radius=5000");
         stringBuilder.append("&type=" + CurrentUser.userFilterSetting);
         stringBuilder.append("&sensor=true");
-        stringBuilder.append("&key=" + BuildConfig.MAPS_API_KEY);
+        stringBuilder.append("&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8");//hardcoded because its looses the apikey on pull form github
         String url = stringBuilder.toString();
 //https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-29.7718778,31.0370528&radius=5000&type=Popular&sensor=true&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
         Object datafetch[] = new Object[2];
