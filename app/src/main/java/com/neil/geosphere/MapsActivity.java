@@ -36,6 +36,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mapbox.geojson.Point;
 import com.neil.geosphere.Objects.CurrentUser;
 import com.neil.geosphere.Objects.FavouriteLocation;
 import com.neil.geosphere.Util.FetchData;
@@ -148,7 +149,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void saveFavourite(String markerName, LatLng favourite) {
         String userID = fAuth.getCurrentUser().getUid();
-        FavouriteLocation newFavourite = new FavouriteLocation(markerName, favourite, userID);
+        String latitude= String.valueOf(favourite.latitude);
+        String longitude= String.valueOf(favourite.longitude);
+        FavouriteLocation newFavourite = new FavouriteLocation(markerName, latitude, longitude, userID);
         DocumentReference reference = fStore.collection("FavouriteLocations").document();
         reference.set(newFavourite).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -222,7 +225,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             lastKnownLocation = task.getResult();
                             if (lastKnownLocation != null) {
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-                                CurrentUser.deviceLocationForRoute = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+                                CurrentUser.deviceLocationForRoute = Point.fromLngLat(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
                                 getFilteredLocations();
                             }
                         } else {

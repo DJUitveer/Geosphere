@@ -4,24 +4,19 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class FavouriteLocation {
     private String Title;
-    private LatLng position;
+
+    private String latitude;
+    private String longitude;
     private String userID;
 
-    public FavouriteLocation(String title, LatLng position, String userID) {
+    public FavouriteLocation(String title, String latitude, String longitude, String userID) {
         Title = title;
-        this.position = position;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.userID = userID;
     }
 
     public FavouriteLocation() {
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     public String getTitle() {
@@ -32,12 +27,27 @@ public class FavouriteLocation {
         Title = title;
     }
 
-    public LatLng getPosition() {
-        return position;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setPosition(LatLng position) {
-        this.position = position;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 }
