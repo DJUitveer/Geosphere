@@ -99,17 +99,16 @@ public class RegistrationActivity extends AppCompatActivity {
         username = edtusername.getText().toString();
         email = edtemail.getText().toString();
 
+        SaveUser(name,surname,username,email,fAuth.getUid());
 
-        User u = new User(CurrentUser.UID,name,surname,username,email);
-        mDatabaseRef.child(CurrentUser.UID).setValue(u);
 
         if (rbnMetric.isChecked() && Landmark.getSelectedItem() != null) {
-            String uid = CurrentUser.UID;
+            String uid = fAuth.getUid();
             String unitOfMeasurement = rbnMetric.getText().toString();
             String landmarkType = Landmark.getSelectedItem().toString();
             SaveUserSettings(uid, landmarkType, unitOfMeasurement);
         } else if (rbnImperial.isChecked() && Landmark.getSelectedItem() != null) {
-            String uid = CurrentUser.UID;
+            String uid = fAuth.getUid();
             String unitOfMeasurement = rbnImperial.getText().toString();
             String landmarkType = Landmark.getSelectedItem().toString();
             SaveUserSettings(uid, landmarkType, unitOfMeasurement);
@@ -129,6 +128,24 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(RegistrationActivity.this, "Defaults Saved", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(RegistrationActivity.this, "Failed" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void SaveUser(String name, String surname, String username, String email ,String uid) {
+
+        User u = new User(name,surname,username,email,uid);
+        DocumentReference reference = fStore.collection("Users").document(uid);
+        reference.set(u).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(RegistrationActivity.this, "User Saved", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
