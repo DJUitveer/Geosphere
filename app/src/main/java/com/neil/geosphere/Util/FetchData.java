@@ -1,29 +1,35 @@
 package com.neil.geosphere.Util;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class FetchData {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Executor executor = Executors.newCachedThreadPool();
-    //https://stackoverflow.com/questions/32937838/google-maps-api-and-custom-polyline-route-between-markers
     String nearbyPlaces;
     String route;
     GoogleMap googleMap;
     String url;
     LatLng startDestination;
     LatLng endDestination;
+    static Polyline polylineToAdd;
 
     //background method to get nearby places from your location
     public void doOnThreads(Object... object) {
@@ -62,7 +68,6 @@ public class FetchData {
                                 MarkerOptions markerOptions = new MarkerOptions();
                                 markerOptions.title(name);
                                 markerOptions.position(latLng);
-                                markerOptions.snippet(placeID);
                                 googleMap.addMarker(markerOptions);
                             }
                         } catch (Exception e) {
@@ -74,47 +79,46 @@ public class FetchData {
         });
 
     }
-
-    //todo:get routes coords and make polyline appear on maps fragment (for final POE #INCOMPLETE)
-    //https://developers.google.com/maps/documentation/android-sdk/polygon-tutorial
-    //https://developers.google.com/maps/documentation/navigation/android-sdk/v2/route#add_a_navigation_fragment
-    public void GetDirections(LatLng... latLngParamaters) {
+    //https://stackoverflow.com/questions/15139271/google-maps-android-api-v2-how-to-remove-polylines-from-the-map
+    public void GetDirections(Object... object) {
+        //background thread
         executor.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    startDestination = latLngParamaters[0];
-                    endDestination = latLngParamaters[1];
+                    googleMap = (GoogleMap) object[0];
+                    url = (String) object[1];
                     DowloadUrl dowloadUrl = new DowloadUrl();
                     route = dowloadUrl.retrieveURL(url);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+                //UI thread
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            JSONObject jsonObject = new JSONObject(route);
-                            JSONArray jsonArray = jsonObject.getJSONArray("results");
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject getResults = jsonArray.getJSONObject(i);
-                                JSONObject getLocation = getResults.getJSONObject("geometry").getJSONObject("location");
+                            Object result = new JSONObject(route);
+                            JSONArray routes = ((JSONObject) result).getJSONArray("routes");
 
-                                String lat = getLocation.getString("lat");
-                                String lng = getLocation.getString("lng");
+                            long distanceForSegment = routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("distance").getInt("value");
+                            JSONArray steps = routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONArray("steps");
 
-                                JSONObject getName = jsonArray.getJSONObject(i);
-                                String name = getName.getString("name");
+                            List<LatLng> lines = new ArrayList<LatLng>();
 
-                                LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-
-                                MarkerOptions markerOptions = new MarkerOptions();
-                                markerOptions.title(name);
-                                markerOptions.position(latLng);
-                                googleMap.addMarker(markerOptions);
-
+                            for (int i = 0; i < steps.length(); i++) {
+                                String polyline = steps.getJSONObject(i).getJSONObject("polyline").getString("points");
+                                for (LatLng p : decodePolyline(polyline)) {
+                                    lines.add(p);
+                                }
                             }
-                        } catch (Exception e) {
+
+                           if (polylineToAdd!=null){
+                               polylineToAdd.remove();
+                           }
+                            polylineToAdd=googleMap.addPolyline(new PolylineOptions().addAll(lines).width(10).color(Color.BLUE));
+
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -123,5 +127,38 @@ public class FetchData {
         });
     }
 
+    private List<LatLng> decodePolyline(String encoded) {
+
+        List<LatLng> poly = new ArrayList<LatLng>();
+
+        int index = 0, len = encoded.length();
+        int lat = 0, lng = 0;
+
+        while (index < len) {
+            int b, shift = 0, result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lat += dlat;
+
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lng += dlng;
+
+            LatLng p = new LatLng((double) lat / 1E5, (double) lng / 1E5);
+            poly.add(p);
+        }
+
+        return poly;
+    }
 
 }

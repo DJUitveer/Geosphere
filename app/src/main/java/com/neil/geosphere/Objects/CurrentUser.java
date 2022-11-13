@@ -7,4 +7,5 @@ public class CurrentUser {
     public static String userFilterSetting;
     public static String userEmail;
     public static Point deviceLocationForRoute;
+    public static String unitOfMeasurement;
 }

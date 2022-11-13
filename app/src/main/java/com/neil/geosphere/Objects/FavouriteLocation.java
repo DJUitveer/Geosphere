@@ -4,7 +4,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class FavouriteLocation {
     private String Title;
-
     private String latitude;
     private String longitude;
     private String userID;
