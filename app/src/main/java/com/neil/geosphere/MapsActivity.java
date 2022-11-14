@@ -1,6 +1,8 @@
 package com.neil.geosphere;
 
 import static android.content.ContentValues.TAG;
+import static com.neil.geosphere.Util.FetchData.ETA;
+import static com.neil.geosphere.Util.FetchData.distance;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -30,6 +32,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -37,18 +40,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.mapbox.api.directions.v5.DirectionsCriteria;
-import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.geojson.Point;
-import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
-import com.mapbox.services.android.navigation.v5.navigation.MapboxNavigation;
-import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 import com.neil.geosphere.Objects.CurrentUser;
 import com.neil.geosphere.Objects.FavouriteLocation;
 import com.neil.geosphere.Objects.Settings;
@@ -57,11 +53,6 @@ import com.neil.geosphere.databinding.ActivityMapsBinding;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -86,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SearchView searchView;
     private String toFavouritePlaceID = "";
     private boolean navigateTo = false;
-
+    private int selectedPolylineCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,26 +140,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     AlertDialogForMarkerClick(markerName, favouriteLocation);
                     LatLng starting = new LatLng(CurrentUser.deviceLocationForRoute.latitude(), CurrentUser.deviceLocationForRoute.longitude());
                     AlertDialogForMarkerClickNavigation(markerName, favouriteLocation, starting);
-//                    if (navigateTo) {
-//                        double originLatitude = Double.parseDouble(String.valueOf(CurrentUser.deviceLocationForRoute.latitude()));
-//                        double originLongitude = Double.parseDouble(String.valueOf(CurrentUser.deviceLocationForRoute.longitude()));
-//                        LatLng origin = new LatLng(originLatitude, originLongitude);
-//
-//                    }
                     return false;
                 }
             });
+            mMap.setOnPolylineClickListener(new GoogleMap.OnPolylineClickListener() {
+                @Override
+                public void onPolylineClick(@NonNull Polyline polyline) {
+                    if (selectedPolylineCount == 0) {
+                        Toast.makeText(MapsActivity.this, "Distance: " + distance + " ETA: " + ETA, Toast.LENGTH_SHORT).show();
+                        selectedPolylineCount++;
+                    } else {
+                        AlertDialog.Builder navBuilder = new AlertDialog.Builder(MapsActivity.this);
+                        navBuilder.setTitle("Navigation");
+                        navBuilder.setMessage("Do you want to remove this navigation?");
+                        navBuilder.setCancelable(false);
+                        navBuilder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (Dialog, which) -> {
+                            polyline.remove();
+                        });
+                        navBuilder.setNegativeButton("No", (DialogInterface.OnClickListener) (Dialog, which) -> {
+                            selectedPolylineCount = 0;
+                        });
+                        AlertDialog navAlertDialog = navBuilder.create();
+                        navAlertDialog.show();
+                    }
+
+                }
+            });
+
         } else {
             return;
         }
         //https://maps.googleapis.com/maps/api/directions/json?origin=31.037042,-29.771891&destination=31.0356,-29.7968&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
     }//https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyAAzrbFwZnHFud_k-kqD5OSuT_OUnZNVE8
 
+    //gets the route for the user
     private void getPolylines(LatLng origin, LatLng destination, String directionMode) {
         String str_origin = "origin=" + origin.longitude + "," + origin.latitude;
         String str_destination = "destination=" + destination.latitude + "," + destination.longitude;
         String mode = "mode=" + directionMode;
-        String paramaters = str_origin + "&" + str_destination + "&" + mode;
+        String unit = "units=" + CurrentUser.unitOfMeasurement.toLowerCase();
+        String paramaters = str_origin + "&" + str_destination + "&" + mode + "&" + unit;
         String output = "json";
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + paramaters + "&key=" + getString(R.string.GoogleMaps_API_KEY);
 
@@ -178,84 +189,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FetchData fetchData = new FetchData();
         fetchData.GetDirections(datafetch);
-    }
-
-    public void getRoute(Point startPoint, Point destination) {
-        Mapbox.getInstance(MapsActivity.this, getString(R.string.MapBox_Token));
-        MapboxNavigation navigation;
-        navigation = new MapboxNavigation(getApplicationContext(), getString(R.string.MapBox_Token));
-        try {
-            if (CurrentUser.unitOfMeasurement == "Imperial") {
-                NavigationRoute.builder(MapsActivity.this)
-                        .accessToken(getString(R.string.MapBox_Token))
-                        .origin(startPoint)
-                        .destination(destination)
-                        .voiceUnits(DirectionsCriteria.IMPERIAL)
-                        .language(Locale.UK)
-                        .build()
-                        .getRoute(new Callback<DirectionsResponse>() {
-                            @Override
-                            public void onResponse(@NonNull Call<DirectionsResponse> call, @NonNull Response<DirectionsResponse> response) {
-
-                                if (response.body() == null) {
-                                    Toast.makeText(MapsActivity.this, "No routes found 1", Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if (response.body().routes().size() < 0) {
-                                    Toast.makeText(MapsActivity.this, "No routes found", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                route = response.body().routes().get(0);
-                                navigationMapRoute.addRoute(route);
-                                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                                        .directionsRoute(route)
-                                        .shouldSimulateRoute(true)
-                                        .build();
-                                NavigationLauncher.startNavigation(MapsActivity.this, options);
-                            }
-
-                            @Override
-                            public void onFailure(Call<DirectionsResponse> call, Throwable t) {
-                                Toast.makeText(MapsActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            } else if (CurrentUser.unitOfMeasurement == "Metric") {
-                NavigationRoute.builder(MapsActivity.this)
-                        .accessToken(getString(R.string.MapBox_Token))
-                        .origin(startPoint)
-                        .destination(destination)
-                        .voiceUnits(DirectionsCriteria.METRIC)
-                        .language(Locale.UK)
-                        .build()
-                        .getRoute(new Callback<DirectionsResponse>() {
-                            @Override
-                            public void onResponse(@NonNull Call<DirectionsResponse> call, @NonNull Response<DirectionsResponse> response) {
-
-                                if (response.body() == null) {
-                                    Toast.makeText(MapsActivity.this, "No routes found 1", Toast.LENGTH_SHORT).show();
-                                    return;
-                                } else if (response.body().routes().size() < 0) {
-                                    Toast.makeText(MapsActivity.this, "No routes found", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                route = response.body().routes().get(0);
-
-                                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                                        .directionsRoute(route)
-                                        .shouldSimulateRoute(true)
-                                        .build();
-                                NavigationLauncher.startNavigation(MapsActivity.this, options);
-                            }
-
-                            @Override
-                            public void onFailure(Call<DirectionsResponse> call, Throwable t) {
-                                Toast.makeText(MapsActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        } catch (Exception e) {
-            String error = e.toString();
-            Toast.makeText(MapsActivity.this, error, Toast.LENGTH_SHORT).show();
-        }
     }
 
     //method to display an alert dialog when a marker is selected
@@ -276,14 +209,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         favAlertDialog.show();
     }
 
+    //method to display an alert dialog for navigation when a marker is selected
     private void AlertDialogForMarkerClickNavigation(String markerName, LatLng destination, LatLng starting) {
         //Alert Dialog for Navigating
         AlertDialog.Builder navBuilder = new AlertDialog.Builder(MapsActivity.this);
         navBuilder.setTitle("Navigation");
         navBuilder.setMessage("Do you want to navigate to " + markerName + "?");
         navBuilder.setCancelable(false);
+        Point start = Point.fromLngLat(starting.longitude, starting.latitude);
+        Point dest = Point.fromLngLat(destination.latitude, destination.longitude);
         navBuilder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (Dialog, which) -> {
-//            getRoute(starting, destination);
+            //getRoute(start, dest);
             getPolylines(starting, destination, "driving");
 
         });
@@ -294,6 +230,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         navAlertDialog.show();
     }
 
+    //saves the location to bookmarks for the user
     private void saveFavourite(String markerName, LatLng favourite) {
         String userID = fAuth.getCurrentUser().getUid();
         String latitude = String.valueOf(favourite.latitude);
@@ -313,6 +250,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    //gets all nearby locations based on the user's saved settings
     private void getFilteredLocations() {
         stringBuilder.append("location=" + lastKnownLocation.getLatitude() + "," + lastKnownLocation.getLongitude());
         stringBuilder.append("&radius=5000");
@@ -343,6 +281,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         updateLocationUI();
     }
 
+    //checks to see if the device has given permission in order to access the device's location
     public void getLocationPermission() {
         /*
          * Request location permission, so that we can get the location of the
@@ -356,6 +295,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //get the current devices location
     private void getDeviceLocation() {
         /*
          * Get the best and most recent location of the device, which may be null in rare
@@ -409,6 +349,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //gets the unit of measurement that the user has saved
     private void getUnitOfMeasurement() {
         String uid = fAuth.getCurrentUser().getUid();
         fStore.collection("UserSettings").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

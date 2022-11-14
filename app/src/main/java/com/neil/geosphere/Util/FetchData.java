@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.neil.geosphere.Objects.CurrentUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,15 +22,15 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class FetchData {
+    public static String distance;
+    public static String ETA;
+    static Polyline polylineToAdd;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Executor executor = Executors.newCachedThreadPool();
     String nearbyPlaces;
     String route;
     GoogleMap googleMap;
     String url;
-    LatLng startDestination;
-    LatLng endDestination;
-    static Polyline polylineToAdd;
 
     //background method to get nearby places from your location
     public void doOnThreads(Object... object) {
@@ -79,7 +80,8 @@ public class FetchData {
         });
 
     }
-    //https://stackoverflow.com/questions/15139271/google-maps-android-api-v2-how-to-remove-polylines-from-the-map
+
+    //background method to get the route for a destination
     public void GetDirections(Object... object) {
         //background thread
         executor.execute(new Runnable() {
@@ -103,7 +105,8 @@ public class FetchData {
 
                             long distanceForSegment = routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("distance").getInt("value");
                             JSONArray steps = routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONArray("steps");
-
+                            distance = routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("distance").getString("text");
+                            ETA = routes.getJSONObject(0).getJSONArray("legs").getJSONObject(0).getJSONObject("duration").getString("text");
                             List<LatLng> lines = new ArrayList<LatLng>();
 
                             for (int i = 0; i < steps.length(); i++) {
@@ -113,11 +116,12 @@ public class FetchData {
                                 }
                             }
 
-                           if (polylineToAdd!=null){
-                               polylineToAdd.remove();
-                           }
-                            polylineToAdd=googleMap.addPolyline(new PolylineOptions().addAll(lines).width(10).color(Color.BLUE));
+                            if (polylineToAdd != null) {
+                                polylineToAdd.remove();
+                            }
 
+                            polylineToAdd = googleMap.addPolyline(new PolylineOptions().addAll(lines).width(10).color(Color.BLUE));
+                            polylineToAdd.setClickable(true);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -127,6 +131,7 @@ public class FetchData {
         });
     }
 
+    //decoding the polyline from Json in order to display
     private List<LatLng> decodePolyline(String encoded) {
 
         List<LatLng> poly = new ArrayList<LatLng>();

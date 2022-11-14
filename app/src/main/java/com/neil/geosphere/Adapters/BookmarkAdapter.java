@@ -14,7 +14,6 @@ import com.mapbox.geojson.Point;
 import com.neil.geosphere.Objects.CurrentUser;
 import com.neil.geosphere.Objects.FavouriteLocation;
 import com.neil.geosphere.R;
-import com.neil.geosphere.Util.Routing_Nav;
 
 import java.util.ArrayList;
 
