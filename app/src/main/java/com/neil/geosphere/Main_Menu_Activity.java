@@ -104,6 +104,8 @@ public class Main_Menu_Activity extends AppCompatActivity {
 //                                Intent ToHome = new Intent(Main_Menu_Activity.this, HelpActivity.class);
 //                                startActivity(ToHome);
                                 break;
+                            case R.id.image:
+                                ToImage();
                         }
                         return true;
                     }
@@ -137,6 +139,11 @@ public class Main_Menu_Activity extends AppCompatActivity {
 //        GetLastGeoLocation();
         Intent ToMap = new Intent(Main_Menu_Activity.this, MapsActivity.class);
         startActivity(ToMap);
+    }
+    public void ToImage()
+    {
+        Intent Toimage = new Intent(Main_Menu_Activity.this, GeoImageActivity.class);
+        startActivity(Toimage);
     }
 
     @Override

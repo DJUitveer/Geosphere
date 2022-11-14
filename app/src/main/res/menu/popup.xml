@@ -32,4 +32,8 @@
         android:id="@+id/home"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="Main Menu"/>
+    <item
+        android:id="@+id/image"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Take image"/>
 </menu>

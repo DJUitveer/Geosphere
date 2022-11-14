@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GeoImageActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/geosphere_blue_light"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btn_menu_image"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/geosphere_blue_light"
+            android:text="..."
+            android:textColor="@color/geosphere_blue_dark"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_name_image"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:backgroundTint="@color/geosphere_blue_light"
+            android:text="GeoSphere"
+            android:textColor="@color/geosphere_blue_dark"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btn_icon_image"
+            android:layout_width="70sp"
+            android:layout_height="70dp"
+            android:background="@color/translucent"
+            android:layout_gravity="end"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take image"
+        android:textColor="@color/white"
+        app:cornerRadius="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_image"
+        app:layout_constraintVertical_bias="0.032" />
+
+    <ImageView
+        android:id="@+id/imv_image"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:padding="20dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_button"
+        app:layout_constraintVertical_bias="0.139" />
+
+    <TextView
+        android:id="@+id/txv_image"
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:background="@color/translucent_med"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imv_image"
+/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

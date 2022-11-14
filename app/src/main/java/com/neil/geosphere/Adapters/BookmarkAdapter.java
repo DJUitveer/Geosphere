@@ -38,8 +38,8 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkAdapter.ViewHo
         FavouriteLocation model = favouriteLocationArrayList.get(position);
         holder.title.setText(model.getTitle());
         holder.coords.setText("Lat: " + model.getLatitude() + "\nLong: " + model.getLatitude());
-        holder.destination = Point.fromLngLat(Double.parseDouble(model.getLatitude()),Double.parseDouble(model.getLongitude()));
-        holder.start = CurrentUser.deviceLocationForRoute;
+        //holder.destination = Point.fromLngLat(Double.parseDouble(model.getLatitude()),Double.parseDouble(model.getLongitude()));
+        //holder.start = CurrentUser.deviceLocationForRoute;
 
     }
 
