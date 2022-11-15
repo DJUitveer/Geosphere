@@ -22,7 +22,7 @@ import com.neil.geosphere.Objects.Settings;
 
 public class Main_Menu_Activity extends AppCompatActivity {
     //Declaring components
-    private CardView settings, profile, map, bookmark;
+    private CardView settings, profile, map, bookmark, camera, weather;
     private Button menu;
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
@@ -36,6 +36,8 @@ public class Main_Menu_Activity extends AppCompatActivity {
         bookmark = findViewById(R.id.crv_main_menu_open_bookmarked);
         settings = findViewById(R.id.crv_main_menu_settings);
         profile = findViewById(R.id.crv_main_menu_profile);
+        camera = findViewById(R.id.crv_main_menu_take_image);
+        weather = findViewById(R.id.crv_main_menu_check_weather);
         menu = findViewById(R.id.btn_menu_main_menu);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -65,6 +67,20 @@ public class Main_Menu_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ToBookmarks();
+            }
+        });
+
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toimage();
+            }
+        });
+
+        weather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toweather();
             }
         });
         //Method to open and interact with menu
@@ -104,8 +120,6 @@ public class Main_Menu_Activity extends AppCompatActivity {
 //                                Intent ToHome = new Intent(Main_Menu_Activity.this, HelpActivity.class);
 //                                startActivity(ToHome);
                                 break;
-                            case R.id.image:
-                                ToImage();
                         }
                         return true;
                     }
@@ -136,14 +150,20 @@ public class Main_Menu_Activity extends AppCompatActivity {
 
     //method to switch to the Map page
     public void ToMap() {
-//        GetLastGeoLocation();
         Intent ToMap = new Intent(Main_Menu_Activity.this, MapsActivity.class);
         startActivity(ToMap);
     }
-    public void ToImage()
-    {
-        Intent Toimage = new Intent(Main_Menu_Activity.this, GeoImageActivity.class);
-        startActivity(Toimage);
+
+    //method to switch to the GeoImage page
+    public void Toimage() {
+        Intent ToMap = new Intent(Main_Menu_Activity.this, GeoImageActivity.class);
+        startActivity(ToMap);
+    }
+
+    //method to switch to the Weather page
+    public void Toweather() {
+        Intent ToMap = new Intent(Main_Menu_Activity.this, WeatherActivity.class);
+        startActivity(ToMap);
     }
 
     @Override
