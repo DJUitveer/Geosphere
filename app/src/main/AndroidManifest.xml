@@ -28,7 +28,7 @@
         android:theme="@style/Theme.GeoSphere"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".WeatherActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -105,7 +105,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".WeatherActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
