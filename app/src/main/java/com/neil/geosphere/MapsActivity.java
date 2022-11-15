@@ -15,6 +15,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -78,9 +80,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String toFavouritePlaceID = "";
     private boolean navigateTo = false;
     private int selectedPolylineCount = 0;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             return;
@@ -92,6 +98,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fStore = FirebaseFirestore.getInstance();
         getUnitOfMeasurement();
         searchView = findViewById(R.id.sv_Find_Places);
+        progressBar = findViewById(R.id.progressBar);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -127,6 +135,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        //turn off the progress
+        // progressBar.setVisibility(View.GONE);
         mMap = googleMap;
         if (mMap != null) {
             getLocationPermission();
@@ -252,6 +262,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //gets all nearby locations based on the user's saved settings
     private void getFilteredLocations() {
+        progressBar.setVisibility(View.VISIBLE);
+
         stringBuilder.append("location=" + lastKnownLocation.getLatitude() + "," + lastKnownLocation.getLongitude());
         stringBuilder.append("&radius=5000");
         stringBuilder.append("&type=" + CurrentUser.userFilterSetting);
@@ -265,6 +277,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         FetchData fetchData = new FetchData();
         fetchData.doOnThreads(datafetch);
+        progressBar.setVisibility(View.GONE);
+
     }
 
     @Override

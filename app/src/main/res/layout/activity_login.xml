@@ -141,4 +141,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLoginIcon" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="128dp"
+        android:layout_height="52dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.743" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

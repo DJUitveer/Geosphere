@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +32,11 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference("Users");
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Initializing Components
@@ -41,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.etPassword);
         signIn = findViewById(R.id.btnSignIn);
         register = findViewById(R.id.tvSignUp);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -51,15 +56,12 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = email.getText().toString();
                 String userPassword = password.getText().toString();
                 //register method
-                if ( !userEmail.equals(null) && !userEmail.equals("") && !userPassword.equals(null) && !userPassword.equals(""))
-                {
+                if (!userEmail.equals(null) && !userEmail.equals("") && !userPassword.equals(null) && !userPassword.equals("")) {
                     signUp(userEmail, userPassword);
                     Intent switchToSignUp = new Intent(LoginActivity.this, RegistrationActivity.class);
                     switchToSignUp.putExtra("LoginEmail", userEmail);
                     startActivity(switchToSignUp);
-                }
-                else
-                {
+                } else {
                     Toast.makeText(LoginActivity.this, "Please provide Sign Up details to continue", Toast.LENGTH_SHORT).show();
                 }
 
@@ -73,12 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                 String userPassword = password.getText().toString();
                 //login method
 
-                if ( !userEmail.equals(null) && !userEmail.equals("") && !userPassword.equals(null) && !userPassword.equals(""))
-                {
+                if (!userEmail.equals(null) && !userEmail.equals("") && !userPassword.equals(null) && !userPassword.equals("")) {
                     login(userEmail, userPassword);
-                }
-                else
-                {
+                } else {
                     Toast.makeText(LoginActivity.this, "Please provide Login details to continue", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -114,9 +113,12 @@ public class LoginActivity extends AppCompatActivity {
 
     //method to signup using normal email
     public void login(String email, String password) {
+        progressBar.setVisibility(View.VISIBLE);
+
         //Firebase authentication to validate user log in details
         if ((email.isEmpty()) && (password.isEmpty())) {
             Toast.makeText(LoginActivity.this, "Please provide Login details", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
         } else {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -134,6 +136,8 @@ public class LoginActivity extends AppCompatActivity {
                                             CurrentUser.UID = user.getUid();
                                             CurrentUser.userEmail = email;
                                             Toast.makeText(LoginActivity.this, "User Logged in ", Toast.LENGTH_LONG);
+                                            progressBar.setVisibility(View.GONE);
+
                                         }
                                     }
 
@@ -145,11 +149,14 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Toast.makeText(LoginActivity.this, "Login Successful.", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, Main_Menu_Activity.class));
+                                progressBar.setVisibility(View.GONE);
+
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 //Log.w(TAG, "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "Login Failed. Please enter correct Login details", Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     });
